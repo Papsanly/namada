@@ -11,17 +11,17 @@ export default function NamadaLogo(): JSX.Element {
     <Image
       src={'/namada-yellow.gif'}
       alt={'Namada Logo'}
-      width={175}
-      height={22}
-      style={{ objectFit: 'contain' }}
+      style={{ objectFit: 'contain', objectPosition: 'left' }}
+      fill
+      priority
     />
   ) : (
     <Image
       src={'/namada-black.gif'}
       alt={'Namada Logo'}
-      width={175}
-      height={22}
       style={{ objectFit: 'contain' }}
+      fill
+      priority
     />
   )
 }

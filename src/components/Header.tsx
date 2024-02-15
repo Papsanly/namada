@@ -5,8 +5,8 @@ import NamadaLogo from '@/components/NamadaLogo'
 
 export default function Header(): JSX.Element {
   return (
-    <header className={'flex flex-row justify-between items-center'}>
-      <div className={'flex flex-1 justify-start'}>
+    <header className={'flex flex-row justify-between items-center w-full'}>
+      <div className={'flex flex-1 justify-start relative h-6'}>
         <NamadaLogo />
       </div>
       <Tabs defaultValue={'wallet'}>

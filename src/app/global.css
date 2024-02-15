@@ -2,18 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-primary text-primary;
+@layer base {
+  body {
+    @apply bg-primary text-primary;
+  }
 }
 
 :root {
   --background-primary: white;
-  --background-secondary: #464646;
-  --background-card: #222222c0;
+  --background-secondary: #afafaf;
+  --background-card: rgba(159, 159, 159, 0.75);
 
-  --text-primary: #f1f1f1;
-  --text-secondary: #a1a1a1;
-  --text-primary-invert: black;
+  --text-primary: #000000;
+  --text-secondary: #5d5d5d;
+  --text-primary-invert: #ffffff;
 
   --accent: #ffff00;
   --accent-variant: #00ffff;
@@ -31,4 +33,3 @@ body {
   --accent: #ffff00;
   --accent-variant: #00ffff;
 }
-

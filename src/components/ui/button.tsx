@@ -23,7 +23,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-accent text-primary-invert'
+        default: 'bg-accent text-primary dark:text-primary-invert'
       },
       size: {
         default: 'px-4 py-1'

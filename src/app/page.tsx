@@ -1,9 +1,3 @@
-import Header from '@/components/Header'
-
 export default function Home() {
-  return (
-    <main>
-      <Header />
-    </main>
-  )
+  return <main className={'flex flex-col bg-card w-96 h-64 rounded-sm'}></main>
 }

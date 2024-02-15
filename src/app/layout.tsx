@@ -9,7 +9,8 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'Namada App'
+  title: 'Namada App',
+  icons: '/favicon.png'
 }
 
 export default function RootLayout({

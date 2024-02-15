@@ -2,34 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background-primary: black;
-    --background-secondary: #464646;
-    --background-card: #222222c0;
-
-    --text-primary: #f1f1f1;
-    --text-secondary: #a1a1a1;
-    --text-primary-invert: black;
-
-    --accent: #ffff00;
-    --accent-variant: #00ffff;
-  }
-
-  .dark {
-    --background-primary: black;
-    --background-secondary: #464646;
-    --background-card: #222222c0;
-
-    --text-primary: #f1f1f1;
-    --text-secondary: #a1a1a1;
-    --text-primary-invert: black;
-
-    --accent: #ffff00;
-    --accent-variant: #00ffff;
-  }
-
-  body {
-    @apply bg-primary text-primary;
-  }
+body {
+  @apply bg-primary text-primary;
 }
+
+:root {
+  --background-primary: white;
+  --background-secondary: #464646;
+  --background-card: #222222c0;
+
+  --text-primary: #f1f1f1;
+  --text-secondary: #a1a1a1;
+  --text-primary-invert: black;
+
+  --accent: #ffff00;
+  --accent-variant: #00ffff;
+}
+
+.dark {
+  --background-primary: black;
+  --background-secondary: #464646;
+  --background-card: #222222c0;
+
+  --text-primary: #f1f1f1;
+  --text-secondary: #a1a1a1;
+  --text-primary-invert: black;
+
+  --accent: #ffff00;
+  --accent-variant: #00ffff;
+}
+

@@ -11,9 +11,9 @@ export default function ThemeSwitch(): JSX.Element {
   const [mounted, setMounted] = useState(false)
 
   const themes = [
-    { theme: 'dark', icon: <BsFillMoonFill size={16} key={'dark'} /> },
-    { theme: 'system', icon: <RiComputerFill size={16} key={'system'} /> },
-    { theme: 'light', icon: <BsSunFill size={16} key={'light'} /> }
+    { theme: 'dark', icon: <BsFillMoonFill size={11} key={'dark'} /> },
+    { theme: 'system', icon: <RiComputerFill size={11} key={'system'} /> },
+    { theme: 'light', icon: <BsSunFill size={11} key={'light'} /> }
   ]
 
   useEffect(() => setMounted(true), [])
@@ -25,7 +25,7 @@ export default function ThemeSwitch(): JSX.Element {
           <TabsTrigger
             key={theme}
             value={theme}
-            className={'aspect-square p-2.5 !transition-all'}
+            className={'aspect-square p-2 !transition-all'}
           >
             {icon}
           </TabsTrigger>
@@ -40,7 +40,7 @@ export default function ThemeSwitch(): JSX.Element {
             disabled
             key={theme}
             value={theme}
-            className={'aspect-square p-2.5'}
+            className={'aspect-square p-2'}
           >
             {icon}
           </TabsTrigger>

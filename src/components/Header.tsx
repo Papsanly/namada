@@ -1,0 +1,25 @@
+import { JSX } from 'react'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import ThemeSwitch from '@/components/ThemeSwitch'
+import NamadaLogo from '@/components/NamadaLogo'
+
+export default function Header(): JSX.Element {
+  return (
+    <header className={'flex flex-row justify-between items-center'}>
+      <div className={'flex flex-1 justify-start'}>
+        <NamadaLogo />
+      </div>
+      <Tabs defaultValue={'wallet'}>
+        <TabsList>
+          <TabsTrigger value={'wallet'}>Wallet</TabsTrigger>
+          <TabsTrigger value={'ibc'}>IBC</TabsTrigger>
+          <TabsTrigger value={'staking'}>Staking</TabsTrigger>
+          <TabsTrigger value={'proposals'}>Proposals</TabsTrigger>
+        </TabsList>
+      </Tabs>
+      <div className={'flex flex-1 justify-end'}>
+        <ThemeSwitch />
+      </div>
+    </header>
+  )
+}

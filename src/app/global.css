@@ -4,13 +4,13 @@
 
 @layer base {
   body {
-    @apply bg-primary text-primary;
+    @apply bg-primary text-primary p-4 font-space-grotesk;
   }
 }
 
 :root {
   --background-primary: white;
-  --background-secondary: #afafaf;
+  --background-secondary: #e5e5e5;
   --background-card: rgba(159, 159, 159, 0.75);
 
   --text-primary: #000000;

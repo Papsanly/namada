@@ -1,10 +1,9 @@
 'use client'
 
-import { JSX } from 'react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 
-export default function NamadaLogo(): JSX.Element {
+export default function NamadaLogo() {
   const { resolvedTheme } = useTheme()
 
   return resolvedTheme === 'dark' ? (

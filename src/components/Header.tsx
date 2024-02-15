@@ -1,9 +1,8 @@
-import { JSX } from 'react'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import NamadaLogo from '@/components/NamadaLogo'
 
-export default function Header(): JSX.Element {
+export default function Header() {
   return (
     <header className={'flex flex-row justify-between items-center w-full'}>
       <div className={'flex flex-1 justify-start relative h-6'}>

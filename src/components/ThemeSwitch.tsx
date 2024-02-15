@@ -1,12 +1,12 @@
 'use client'
 
-import { JSX, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { BsFillMoonFill, BsSunFill } from 'react-icons/bs'
 import { RiComputerFill } from 'react-icons/ri'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-export default function ThemeSwitch(): JSX.Element {
+export default function ThemeSwitch() {
   const { theme: currentTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 

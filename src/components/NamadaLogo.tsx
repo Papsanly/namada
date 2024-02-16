@@ -2,25 +2,26 @@
 
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
+import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
 
 export default function NamadaLogo() {
   const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
-  return resolvedTheme === 'dark' ? (
-    <Image
-      src={'/namada-yellow.gif'}
-      alt={'Namada Logo'}
-      style={{ objectFit: 'contain', objectPosition: 'left' }}
-      fill
-      priority
-    />
-  ) : (
-    <Image
-      src={'/namada-black.gif'}
-      alt={'Namada Logo'}
-      style={{ objectFit: 'contain' }}
-      fill
-      priority
-    />
+  useEffect(() => setMounted(true), [])
+
+  return (
+    mounted && (
+      <Image
+        src={'/namada-yellow.gif'}
+        alt={'Namada Logo'}
+        style={{ objectFit: 'contain', objectPosition: 'left' }}
+        className={cn(resolvedTheme === 'light' && 'invert saturate-0')}
+        fill
+        sizes={'150px'}
+        priority
+      />
+    )
   )
 }

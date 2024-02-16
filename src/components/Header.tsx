@@ -4,12 +4,14 @@ import NamadaLogo from '@/components/NamadaLogo'
 
 export default function Header() {
   return (
-    <header className={'flex flex-row justify-between items-center w-full'}>
-      <div className={'flex flex-1 justify-start relative h-6'}>
+    <header
+      className={'flex flex-row justify-between items-center w-full gap-1'}
+    >
+      <div className={'flex flex-1 justify-start relative h-6 min-w-[165px]'}>
         <NamadaLogo />
       </div>
       <Tabs defaultValue={'wallet'}>
-        <TabsList>
+        <TabsList className={'bg-secondary rounded-full p-1 h-10'}>
           <TabsTrigger value={'wallet'}>Wallet</TabsTrigger>
           <TabsTrigger value={'ibc'}>IBC</TabsTrigger>
           <TabsTrigger value={'staking'}>Staking</TabsTrigger>

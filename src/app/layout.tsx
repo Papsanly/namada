@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Space_Grotesk } from 'next/font/google'
 import './global.css'
 import Header from '@/components/Header'
+import { cn } from '@/lib/utils'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -22,7 +23,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`flex flex-col gap-8 items-center w-full ${spaceGrotesk.variable}`}
+        className={cn(
+          'flex',
+          'flex-col',
+          'gap-8',
+          'items-center',
+          'w-full',
+          'container',
+          spaceGrotesk.variable
+        )}
       >
         <Providers>
           <Header />

@@ -3,15 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply bg-primary text-primary p-4;
+  }
+
   body {
-    @apply bg-primary text-primary p-4 font-space-grotesk;
+    @apply font-space-grotesk;
   }
 }
 
 :root {
   --background-primary: white;
-  --background-secondary: #e5e5e5;
-  --background-card: rgba(159, 159, 159, 0.75);
+  --background-secondary: #e0e2ea;
 
   --text-primary: #000000;
   --text-secondary: #5d5d5d;
@@ -23,8 +26,7 @@
 
 .dark {
   --background-primary: black;
-  --background-secondary: #464646;
-  --background-card: #222222c0;
+  --background-secondary: #1a1b1f;
 
   --text-primary: #f1f1f1;
   --text-secondary: #a1a1a1;

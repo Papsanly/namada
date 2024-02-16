@@ -11,9 +11,9 @@ export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false)
 
   const themes = [
-    { theme: 'dark', icon: <BsFillMoonFill size={11} key={'dark'} /> },
-    { theme: 'system', icon: <RiComputerFill size={11} key={'system'} /> },
-    { theme: 'light', icon: <BsSunFill size={11} key={'light'} /> }
+    { theme: 'dark', icon: <BsFillMoonFill size={12} key={'dark'} /> },
+    { theme: 'system', icon: <RiComputerFill size={12} key={'system'} /> },
+    { theme: 'light', icon: <BsSunFill size={12} key={'light'} /> }
   ]
 
   useEffect(() => setMounted(true), [])

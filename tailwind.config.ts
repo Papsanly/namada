@@ -13,7 +13,6 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
       screens: {
         '2xl': '1400px'
       }
@@ -37,7 +36,8 @@ const config = {
         'accent-secondary': 'var(--accent-secondary)'
       }
     }
-  }
+  },
+  plugins: [require('tailwindcss-animate')]
 } satisfies Config
 
 export default config

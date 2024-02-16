@@ -8,13 +8,14 @@
   }
 
   body {
-    @apply font-space-grotesk;
+    @apply flex flex-col font-space-grotesk;
   }
 }
 
 :root {
   --background-primary: white;
   --background-secondary: #e0e2ea;
+  --background-tertiary: #c7c9d9;
 
   --text-primary: #000000;
   --text-secondary: #5d5d5d;
@@ -27,6 +28,7 @@
 .dark {
   --background-primary: black;
   --background-secondary: #1a1b1f;
+  --background-tertiary: #2d3034;
 
   --text-primary: #f1f1f1;
   --text-secondary: #a1a1a1;

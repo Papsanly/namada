@@ -26,7 +26,7 @@ const config = {
       backgroundColor: {
         primary: 'var(--background-primary)',
         secondary: 'var(--background-secondary)',
-        card: 'var(--background-card)'
+        tertiary: 'var(--background-tertiary)'
       },
       fontFamily: {
         'space-grotesk': ['var(--font-space-grotesk)', ...fontFamily.sans]

@@ -10,6 +10,37 @@
   body {
     @apply flex flex-col font-space-grotesk;
   }
+
+  ::-webkit-scrollbar {
+    height: theme('spacing[2]');
+  }
+
+  ::-webkit-scrollbar-track {
+    background: theme('backgroundColor.secondary');
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: theme('borderRadius.full');
+    background: theme('backgroundColor.tertiary');
+  }
+
+  .list-gradient-left {
+    background: linear-gradient(
+      to left,
+      transparent,
+      transparent 95%,
+      theme('backgroundColor.secondary')
+    );
+  }
+
+  .list-gradient-right {
+    background: linear-gradient(
+      to right,
+      transparent,
+      transparent 95%,
+      theme('backgroundColor.secondary')
+    );
+  }
 }
 
 :root {
@@ -20,9 +51,13 @@
   --text-primary: #000000;
   --text-secondary: #5d5d5d;
   --text-primary-invert: #ffffff;
+  --text-secondary-invert: #c7c7c7;
 
   --accent: #ffff00;
   --accent-variant: #00ffff;
+
+  --border-primary: #000000;
+  --border-secondary: #5d5d5d;
 }
 
 .dark {
@@ -33,7 +68,11 @@
   --text-primary: #f1f1f1;
   --text-secondary: #a1a1a1;
   --text-primary-invert: black;
+  --text-secondary-invert: #646464;
 
   --accent: #ffff00;
   --accent-variant: #00ffff;
+
+  --border-primary: #f1f1f1;
+  --border-secondary: #a1a1a1;
 }

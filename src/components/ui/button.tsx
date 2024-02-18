@@ -13,7 +13,6 @@ const buttonVariants = cva(
     'rounded-full',
     'text-sm',
     'font-medium',
-    'transition-colors',
     'focus-visible:outline-none',
     'focus-visible:ring-1',
     'focus-visible:ring-ring',
@@ -23,7 +22,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-accent text-primary dark:text-primary-invert'
+        default: 'bg-accent text-primary dark:text-primary-invert',
+        ghost: ''
       },
       size: {
         default: 'px-4 py-1'

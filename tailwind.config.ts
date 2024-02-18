@@ -21,19 +21,24 @@ const config = {
       textColor: {
         primary: 'var(--text-primary)',
         secondary: 'var(--text-secondary)',
-        'primary-invert': 'var(--text-primary-invert)'
+        'primary-invert': 'var(--text-primary-invert)',
+        'secondary-invert': 'var(--text-secondary-invert)'
       },
       backgroundColor: {
         primary: 'var(--background-primary)',
         secondary: 'var(--background-secondary)',
         tertiary: 'var(--background-tertiary)'
       },
+      borderColor: {
+        primary: 'var(--border-primary)',
+        secondary: 'var(--border-secondary)'
+      },
       fontFamily: {
         'space-grotesk': ['var(--font-space-grotesk)', ...fontFamily.sans]
       },
       colors: {
         accent: 'var(--accent)',
-        'accent-secondary': 'var(--accent-secondary)'
+        'accent-variant': 'var(--accent-variant)'
       }
     }
   },

@@ -18,11 +18,15 @@ const config = {
       }
     },
     extend: {
+      borderRadius: {
+        sm: '5px'
+      },
       textColor: {
         primary: 'var(--text-primary)',
         secondary: 'var(--text-secondary)',
         'primary-invert': 'var(--text-primary-invert)',
-        'secondary-invert': 'var(--text-secondary-invert)'
+        'secondary-invert': 'var(--text-secondary-invert)',
+        destructive: 'var(--text-destructive)'
       },
       backgroundColor: {
         primary: 'var(--background-primary)',

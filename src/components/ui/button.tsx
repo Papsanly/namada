@@ -12,10 +12,10 @@ const buttonVariants = cva(
     'whitespace-nowrap',
     'rounded-full',
     'text-sm',
-    'font-medium',
+    'font-bold',
     'focus-visible:outline-none',
     'focus-visible:ring-1',
-    'focus-visible:ring-ring',
+    'focus-visible:ring-accent',
     'disabled:pointer-events-none',
     'disabled:opacity-50'
   ),
@@ -23,10 +23,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-accent text-primary dark:text-primary-invert',
+        outline: 'border border-secondary rounded-sm text-secondary',
         ghost: ''
       },
       size: {
-        default: 'px-4 py-1'
+        default: 'px-4 py-1',
+        sm: 'px-2 py-1 text-xs',
+        lg: 'px-4 py-1 text-lg'
       }
     },
     defaultVariants: {

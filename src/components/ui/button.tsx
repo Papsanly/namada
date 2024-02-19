@@ -13,9 +13,6 @@ const buttonVariants = cva(
     'rounded-full',
     'text-sm',
     'font-bold',
-    'focus-visible:outline-none',
-    'focus-visible:ring-1',
-    'focus-visible:ring-accent',
     'disabled:pointer-events-none',
     'disabled:opacity-50'
   ),

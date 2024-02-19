@@ -25,9 +25,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           'file:text-sm',
           'file:font-medium',
           'placeholder:text-secondary',
-          'focus-visible:outline-none',
-          'focus-visible:ring-1',
-          'focus-visible:ring-accent',
           'disabled:cursor-not-allowed',
           'disabled:opacity-50',
           className

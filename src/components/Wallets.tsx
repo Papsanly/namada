@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useEffect, useRef, useState } from 'react'
+import { FaCopy } from 'react-icons/fa6'
 
 type WalletProps = {
   alias: string
@@ -27,7 +28,7 @@ function Wallet({ alias, selected, balance, isShielded }: WalletProps) {
         'mb-1',
         'w-full',
         'text-start',
-        'gap-4',
+        'gap-6',
         'border-secondary',
         'relative',
         'border-2',
@@ -36,7 +37,17 @@ function Wallet({ alias, selected, balance, isShielded }: WalletProps) {
           : 'border-transparent'
       )}
     >
-      <p className={'font-bold text-lg'}>{alias}</p>
+      <div className={'flex flex-col'}>
+        <p className={'font-bold text-lg'}>{alias}</p>
+        <div className={'flex items-center gap-1'}>
+          <p className={'text-secondary text-xs'}>tnam123123...123123</p>
+          <FaCopy size={9} className={'text-secondary'} />
+        </div>
+      </div>
+      <div className={'flex flex-col items-end'}>
+        <p className={'text-3xl font-bold'}>{balance} NAM</p>
+        <p className={'text-secondary'}>$999 USD</p>
+      </div>
       <div
         className={cn(
           'flex',
@@ -57,7 +68,6 @@ function Wallet({ alias, selected, balance, isShielded }: WalletProps) {
           {isShielded ? 'Shielded' : 'Transparent'}
         </p>
       </div>
-      <p className={'text-4xl font-bold'}>${balance}</p>
     </Button>
   )
 }

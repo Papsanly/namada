@@ -21,7 +21,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-accent text-primary dark:text-primary-invert',
-        outline: 'border-2 border-secondary rounded-sm text-secondary',
+        secondary: 'bg-secondary rounded-sm text-secondary',
         ghost: ''
       },
       size: {

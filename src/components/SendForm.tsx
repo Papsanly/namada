@@ -62,13 +62,12 @@ export default function SendForm() {
                 </FormControl>
                 <Button
                   type={'button'}
-                  variant={'outline'}
+                  variant={'secondary'}
                   size={'sm'}
                   className={cn(
                     'absolute',
                     'right-1.5',
                     'top-[50%]',
-                    'opacity-50',
                     'translate-y-[-50%]'
                   )}
                 >

@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       borderRadius: {
-        sm: '5px'
+        sm: '4px'
       },
       textColor: {
         primary: 'var(--text-primary)',
@@ -35,7 +35,8 @@ const config = {
       },
       borderColor: {
         primary: 'var(--border-primary)',
-        secondary: 'var(--border-secondary)'
+        secondary: 'var(--border-secondary)',
+        destructive: 'var(--border-destructive)'
       },
       fontFamily: {
         'space-grotesk': ['var(--font-space-grotesk)', ...fontFamily.sans]

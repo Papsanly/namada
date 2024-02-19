@@ -14,13 +14,14 @@ const buttonVariants = cva(
     'text-sm',
     'font-bold',
     'disabled:pointer-events-none',
-    'disabled:opacity-50'
+    'disabled:opacity-50',
+    'shadow-sm'
   ),
   {
     variants: {
       variant: {
         default: 'bg-accent text-primary dark:text-primary-invert',
-        outline: 'border border-secondary rounded-sm text-secondary',
+        outline: 'border-2 border-secondary rounded-sm text-secondary',
         ghost: ''
       },
       size: {

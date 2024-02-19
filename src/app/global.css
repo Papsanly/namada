@@ -23,19 +23,23 @@
     border-radius: theme('borderRadius.full');
     background: theme('backgroundColor.tertiary');
   }
-}
 
-@layer utilities {
-  .input-number-appearance-none::-webkit-outer-spin-button,
-  .input-number-appearance-none::-webkit-inner-spin-button {
+  form {
+    @apply flex flex-col gap-4;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  .input-number-appearance-none[type='number'] {
+  input[type='number'] {
     -moz-appearance: textfield;
   }
+}
 
+@layer utilities {
   .list-gradient-left {
     background: linear-gradient(
       to left,
@@ -58,19 +62,20 @@
 :root {
   --background-primary: white;
   --background-secondary: #e0e2ea;
-  --background-tertiary: #c7c9d9;
+  --background-tertiary: #ffffff;
 
   --text-primary: #000000;
-  --text-secondary: #5d5d5d;
+  --text-secondary: #a8a8a8;
   --text-primary-invert: #ffffff;
   --text-secondary-invert: #c7c7c7;
-  --text-destructive: #db2777;
+  --text-destructive: #dc2626;
 
   --accent: #ffff00;
-  --accent-variant: #00ffff;
+  --accent-variant: #00d2d2;
 
   --border-primary: #000000;
-  --border-secondary: #5d5d5d;
+  --border-secondary: #a8a8a8;
+  --border-destructive: #dc2626;
 }
 
 .dark {
@@ -82,11 +87,12 @@
   --text-secondary: #a1a1a1;
   --text-primary-invert: black;
   --text-secondary-invert: #646464;
-  --text-destructive: #f472b6;
+  --text-destructive: #f87171;
 
   --accent: #ffff00;
   --accent-variant: #00ffff;
 
   --border-primary: #f1f1f1;
   --border-secondary: #a1a1a1;
+  --border-destructive: #f87171;
 }

@@ -11,7 +11,7 @@ export default function Header() {
         <NamadaLogo />
       </div>
       <Tabs defaultValue={'wallet'}>
-        <TabsList className={'bg-secondary rounded-full p-1 h-10'}>
+        <TabsList className={'rounded-full dark:bg-transparent'}>
           <TabsTrigger value={'wallet'}>Wallet</TabsTrigger>
           <TabsTrigger value={'ibc'}>IBC</TabsTrigger>
           <TabsTrigger value={'staking'}>Staking</TabsTrigger>

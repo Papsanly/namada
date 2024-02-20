@@ -3,6 +3,7 @@ import { FaCopy } from 'react-icons/fa6'
 import ScrollArea from '@/components/ui/ScrollArea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
+import { RadioGroupProps } from '@radix-ui/react-radio-group'
 
 export type WalletProps = {
   id: number
@@ -72,16 +73,21 @@ function Wallet({ alias, balance, isShielded }: WalletProps) {
   )
 }
 
-export default function Wallets({ wallets }: { wallets: WalletProps[] }) {
+export default function Wallets({
+  wallets,
+  ...props
+}: RadioGroupProps & {
+  wallets: WalletProps[]
+}) {
   return (
     <ScrollArea className={'rounded-sm has-[:focus-visible]:default-ring'}>
-      <RadioGroup className={'flex flex-row gap-1'}>
+      <RadioGroup {...props} className={'flex flex-row gap-1'}>
         {wallets.map(wallet => (
           <div key={wallet.id}>
             <Label className={'relative'}>
               <RadioGroupItem
                 className={'peer absolute opacity-0'}
-                value={`wallet-${wallet.id}`}
+                value={`${wallet.id}`}
               />
               <Wallet {...wallet} />
             </Label>

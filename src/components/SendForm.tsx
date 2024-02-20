@@ -14,17 +14,20 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import Wallets, { WalletProps } from '@/components/Wallets'
 
 const sendFormSchema = z.object({
+  wallet: z.string().min(1, 'Required'),
   recipient: z.string().min(1, 'Required'),
   amount: z.coerce.number().positive('Must be greater than 0'),
   memo: z.string().optional()
 })
 
-export default function SendForm() {
+export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
   const form = useForm<z.infer<typeof sendFormSchema>>({
     resolver: zodResolver(sendFormSchema),
     defaultValues: {
+      wallet: '',
       recipient: '',
       amount: 0,
       memo: ''
@@ -38,6 +41,23 @@ export default function SendForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
+          control={form.control}
+          name={'wallet'}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Select Wallet</FormLabel>
+              <FormMessage />
+              <FormControl>
+                <Wallets
+                  wallets={wallets}
+                  defaultValue={field.value}
+                  onValueChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name={'recipient'}

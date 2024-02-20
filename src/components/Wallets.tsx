@@ -19,7 +19,8 @@ function Wallet({ alias, selected, balance, isShielded }: WalletProps) {
       className={cn(
         'flex',
         'flex-row',
-        'bg-tertiary',
+        'bg-primary',
+        'dark:bg-tertiary',
         'rounded-sm',
         'justify-between',
         'items-center',

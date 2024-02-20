@@ -4,12 +4,11 @@ import ScrollArea from '@/components/ui/ScrollArea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 
-type WalletProps = {
+export type WalletProps = {
   id: number
   alias: string
   balance: number
   isShielded: boolean
-  selected: boolean
 }
 
 function Wallet({ alias, balance, isShielded }: WalletProps) {

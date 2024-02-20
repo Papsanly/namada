@@ -1,17 +1,8 @@
-'use client'
-
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
-
-import Wallets from '@/components/Wallets'
-import SendForm from '@/components/SendForm'
-import Actions, { Action } from '@/components/Actions'
+import Actions from '@/components/Actions'
 import Balance from '@/components/Balance'
-import Receive from '@/components/Receive'
 
 export default function Home() {
-  const [action, setAction] = useState<Action>('send')
-
   const wallets = [
     { id: 1, alias: 'papsan', balance: 999999, isShielded: true },
     { id: 2, alias: 'papsan', balance: 1, isShielded: false },
@@ -36,9 +27,7 @@ export default function Home() {
       )}
     >
       <Balance balance={totalBalance} />
-      <Actions action={action} setAction={setAction} />
-      <Wallets wallets={wallets} selectedId={1} />
-      {action === 'send' ? <SendForm /> : <Receive />}
+      <Actions wallets={wallets} />
     </main>
   )
 }

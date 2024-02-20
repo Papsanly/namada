@@ -1,16 +1,10 @@
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import Wallets, { WalletProps } from '@/components/Wallets'
+import SendForm from '@/components/SendForm'
 
-export type Action = 'send' | 'receive'
-
-export default function Actions({
-  action,
-  setAction
-}: {
-  action: Action
-  setAction: (action: Action) => void
-}) {
+export default function Actions({ wallets }: { wallets: WalletProps[] }) {
   return (
-    <Tabs value={action} onValueChange={value => setAction(value as Action)}>
+    <Tabs defaultValue={'send'}>
       <TabsList className={'w-full text-lg bg-tertiary rounded-full'}>
         <TabsTrigger value={'send'} className={'flex-1'}>
           Send
@@ -19,6 +13,11 @@ export default function Actions({
           Receive
         </TabsTrigger>
       </TabsList>
+      <TabsContent value={'send'}>
+        <Wallets wallets={wallets} />
+        <SendForm />
+      </TabsContent>
+      <TabsContent value={'receive'}></TabsContent>
     </Tabs>
   )
 }

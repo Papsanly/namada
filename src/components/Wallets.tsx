@@ -1,9 +1,7 @@
-'use client'
-
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useEffect, useRef, useState } from 'react'
 import { FaCopy } from 'react-icons/fa6'
+import ScrollArea from '@/components/ui/ScrollArea'
 
 type WalletProps = {
   alias: string
@@ -84,70 +82,15 @@ type WalletsProps = {
 }
 
 export default function Wallets({ wallets, selectedId }: WalletsProps) {
-  const ref = useRef<HTMLUListElement>(null)
-  const [scrollMaxToLeft, setScrollMaxToLeft] = useState(true)
-  const [scrollMaxToRight, setScrollMaxToRight] = useState(true)
-
-  useEffect(() => {
-    const scrollElement = ref.current
-
-    if (scrollElement === null) {
-      return
-    }
-
-    function isScrolledToMaxRight(element: HTMLElement) {
-      const { scrollWidth, scrollLeft, clientWidth } = element
-      return scrollWidth - scrollLeft - clientWidth < 1
-    }
-
-    function isScrolledToMaxLeft(element: HTMLElement) {
-      return element.scrollLeft < 1
-    }
-
-    const scrollListener = () => {
-      setScrollMaxToLeft(isScrolledToMaxLeft(scrollElement))
-      setScrollMaxToRight(isScrolledToMaxRight(scrollElement))
-    }
-    scrollListener()
-
-    scrollElement?.addEventListener('scroll', scrollListener)
-
-    return () => {
-      scrollElement?.removeEventListener('scroll', scrollListener)
-    }
-  }, [])
-
   return (
-    <div className={'relative'}>
-      <div
-        className={cn(
-          'absolute',
-          'inset-0',
-          'pointer-events-none',
-          'transition-opacity',
-          'list-gradient-left',
-          'z-10',
-          scrollMaxToLeft && 'opacity-0'
-        )}
-      />
-      <div
-        className={cn(
-          'absolute',
-          'inset-0',
-          'pointer-events-none',
-          'transition-opacity',
-          'list-gradient-right',
-          'z-10',
-          scrollMaxToRight && 'opacity-0'
-        )}
-      />
-      <ul className={'flex flex-row gap-1 overflow-x-scroll'} ref={ref}>
+    <ScrollArea>
+      <ul className={'flex flex-row gap-1'}>
         {wallets.map(wallet => (
           <li key={wallet.id} className={''}>
             <Wallet {...wallet} selected={wallet.id === selectedId} />
           </li>
         ))}
       </ul>
-    </div>
+    </ScrollArea>
   )
 }

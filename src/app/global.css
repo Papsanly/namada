@@ -7,6 +7,12 @@
     @apply bg-primary text-primary p-4;
   }
 
+  *:focus-visible,
+  .default-ring {
+    outline: none;
+    @apply ring-2 ring-black dark:ring-offset-2 dark:ring-offset-black dark:ring-accent;
+  }
+
   body {
     @apply flex flex-col font-space-grotesk;
   }

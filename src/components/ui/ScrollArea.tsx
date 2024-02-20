@@ -1,6 +1,5 @@
 'use client'
 
-import { JSX } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -13,7 +12,11 @@ function isScrolledToMaxLeft(element: HTMLElement) {
   return element.scrollLeft < 1
 }
 
-export default function ScrollArea({ children }: { children: JSX.Element }) {
+export default function ScrollArea({
+  children,
+  className,
+  ...props
+}: React.HTMLProps<HTMLDivElement>) {
   const ref = useRef<HTMLDivElement>(null)
   const [scrollMaxToLeft, setScrollMaxToLeft] = useState(true)
   const [scrollMaxToRight, setScrollMaxToRight] = useState(true)
@@ -39,7 +42,7 @@ export default function ScrollArea({ children }: { children: JSX.Element }) {
   }, [])
 
   return (
-    <div className={'relative'}>
+    <div className={cn('relative', className)} {...props}>
       <div
         className={cn(
           'absolute',

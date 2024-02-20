@@ -1,19 +1,20 @@
-import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { FaCopy } from 'react-icons/fa6'
 import ScrollArea from '@/components/ui/ScrollArea'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Label } from '@/components/ui/label'
 
 type WalletProps = {
+  id: number
   alias: string
   balance: number
   isShielded: boolean
   selected: boolean
 }
 
-function Wallet({ alias, selected, balance, isShielded }: WalletProps) {
+function Wallet({ alias, balance, isShielded }: WalletProps) {
   return (
-    <Button
-      variant={'ghost'}
+    <div
       className={cn(
         'flex',
         'flex-row',
@@ -31,9 +32,10 @@ function Wallet({ alias, selected, balance, isShielded }: WalletProps) {
         'border-secondary',
         'relative',
         'border-2',
-        selected
-          ? ['border-primary', 'dark:border-accent']
-          : 'border-transparent'
+        'text-nowrap',
+        'border-transparent',
+        'peer-data-[state=checked]:border-primary',
+        'peer-data-[state=checked]:dark:border-accent'
       )}
     >
       <div className={'flex flex-col'}>
@@ -67,30 +69,26 @@ function Wallet({ alias, selected, balance, isShielded }: WalletProps) {
           {isShielded ? 'Shielded' : 'Transparent'}
         </p>
       </div>
-    </Button>
+    </div>
   )
 }
 
-type WalletsProps = {
-  selectedId: number
-  wallets: {
-    id: number
-    alias: string
-    balance: number
-    isShielded: boolean
-  }[]
-}
-
-export default function Wallets({ wallets, selectedId }: WalletsProps) {
+export default function Wallets({ wallets }: { wallets: WalletProps[] }) {
   return (
-    <ScrollArea>
-      <ul className={'flex flex-row gap-1'}>
+    <ScrollArea className={'rounded-sm has-[:focus-visible]:default-ring'}>
+      <RadioGroup className={'flex flex-row gap-1'}>
         {wallets.map(wallet => (
-          <li key={wallet.id} className={''}>
-            <Wallet {...wallet} selected={wallet.id === selectedId} />
-          </li>
+          <div key={wallet.id}>
+            <Label className={'relative'}>
+              <RadioGroupItem
+                className={'peer absolute opacity-0'}
+                value={`wallet-${wallet.id}`}
+              />
+              <Wallet {...wallet} />
+            </Label>
+          </div>
         ))}
-      </ul>
+      </RadioGroup>
     </ScrollArea>
   )
 }

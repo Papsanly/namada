@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import Wallets, { WalletProps } from '@/components/Wallets'
+import { getIntegration, Namada } from '@namada/integrations'
 
 const sendFormSchema = z.object({
   wallet: z.string().min(1, 'Required'),
@@ -34,8 +35,15 @@ export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
     }
   })
 
-  function onSubmit(values: z.infer<typeof sendFormSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof sendFormSchema>) {
+    const namada = getIntegration('namada') as Namada
+    if (namada.detect()) {
+      await namada.connect()
+      console.log(await namada.accounts())
+      console.log(values)
+    } else {
+      console.log('Namada extension not detected')
+    }
   }
 
   return (
@@ -46,7 +54,7 @@ export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
           name={'wallet'}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select Wallet</FormLabel>
+              <FormLabel>Select a Wallet</FormLabel>
               <FormMessage />
               <FormControl>
                 <Wallets

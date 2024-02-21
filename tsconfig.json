@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -18,9 +19,16 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@namada/integrations": ["./namada-interface/packages/integrations/src"],
+      "@namada/types": ["./namada-interface/packages/types/src"],
+      "@namada/utils": ["./namada-interface/packages/utils/src"],
+      "@namada/config": ["./namada-interface/packages/config/src"],
+      "@namada/hooks": ["./namada-interface/packages/hooks/src"],
+      "@namada/chains": ["./namada-interface/packages/chains/src"]
     }
   },
+  "references": [{ "path": "./namada-interface/packages/integrations" }],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

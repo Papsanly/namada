@@ -28,7 +28,6 @@
       "@namada/chains": ["./namada-interface/packages/chains/src"]
     }
   },
-  "references": [{ "path": "./namada-interface/packages/integrations" }],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

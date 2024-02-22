@@ -55,7 +55,7 @@ export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
           name={'wallet'}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select a Wallet</FormLabel>
+              <p className={'text-lg font-bold'}>Select a Wallet</p>
               <FormMessage />
               <FormControl>
                 <Wallets

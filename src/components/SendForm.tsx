@@ -22,7 +22,7 @@ const sendFormSchema = z.object({
   wallet: z.string().min(1, 'Required'),
   recipient: z.string().min(1, 'Required'),
   amount: z.coerce.number().positive('Must be greater than 0'),
-  memo: z.string().optional()
+  memo: z.string()
 })
 
 export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
@@ -59,6 +59,7 @@ export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
               <FormMessage />
               <FormControl>
                 <Wallets
+                  {...field}
                   wallets={wallets}
                   defaultValue={field.value}
                   onValueChange={field.onChange}

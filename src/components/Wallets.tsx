@@ -4,6 +4,8 @@ import ScrollArea from '@/components/ui/ScrollArea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { RadioGroupProps } from '@radix-ui/react-radio-group'
+import React from 'react'
+import { useFormField } from '@/components/ui/form'
 
 export type WalletProps = {
   id: number
@@ -73,15 +75,26 @@ function Wallet({ alias, balance, isShielded }: WalletProps) {
   )
 }
 
-export default function Wallets({
-  wallets,
-  ...props
-}: RadioGroupProps & {
-  wallets: WalletProps[]
-}) {
+function Wallets(
+  {
+    wallets,
+    ...props
+  }: RadioGroupProps & {
+    wallets: WalletProps[]
+  },
+  ref: React.Ref<HTMLDivElement>
+) {
+  const { error } = useFormField()
+
   return (
-    <ScrollArea className={'rounded-sm has-[:focus-visible]:default-ring'}>
-      <RadioGroup {...props} className={'flex flex-row gap-1'}>
+    <ScrollArea
+      className={cn(
+        'rounded-sm',
+        'has-[:focus-visible]:default-ring',
+        error && 'border-2 border-destructive'
+      )}
+    >
+      <RadioGroup ref={ref} {...props} className={'flex flex-row gap-1'}>
         {wallets.map(wallet => (
           <div key={wallet.id}>
             <Label className={'relative'}>
@@ -97,3 +110,5 @@ export default function Wallets({
     </ScrollArea>
   )
 }
+
+export default React.forwardRef(Wallets)

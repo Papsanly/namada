@@ -18,8 +18,8 @@ export default function NamadaLogo() {
         alt={'Namada Logo'}
         style={{ objectFit: 'contain', objectPosition: 'left' }}
         className={cn(resolvedTheme === 'light' && 'invert saturate-0')}
-        fill
-        sizes={'150px'}
+        width={150}
+        height={22}
         priority
       />
     )

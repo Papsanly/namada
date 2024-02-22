@@ -7,7 +7,7 @@ export default function Header() {
     <header
       className={'flex flex-row justify-between items-center w-full gap-1'}
     >
-      <div className={'flex flex-1 justify-start relative h-6 min-w-[165px]'}>
+      <div className={'flex flex-1 justify-start min-w-[165px]'}>
         <NamadaLogo />
       </div>
       <Tabs defaultValue={'wallet'}>

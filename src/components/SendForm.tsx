@@ -14,7 +14,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import Wallets, { WalletProps } from '@/components/Wallets'
+import Wallets from '@/components/Wallets'
 import { Namada } from '@namada/integrations'
 import { chains } from '@namada/chains'
 
@@ -25,7 +25,7 @@ const sendFormSchema = z.object({
   memo: z.string()
 })
 
-export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
+export default function SendForm() {
   const form = useForm<z.infer<typeof sendFormSchema>>({
     resolver: zodResolver(sendFormSchema),
     defaultValues: {
@@ -60,7 +60,6 @@ export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
               <FormControl>
                 <Wallets
                   {...field}
-                  wallets={wallets}
                   defaultValue={field.value}
                   onValueChange={field.onChange}
                 />

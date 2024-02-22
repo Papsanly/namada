@@ -6,13 +6,10 @@ import { Label } from '@/components/ui/label'
 import { RadioGroupProps } from '@radix-ui/react-radio-group'
 import React from 'react'
 import { useFormField } from '@/components/ui/form'
-
-export type WalletProps = {
-  id: number
-  alias: string
-  balance: number
-  isShielded: boolean
-}
+import {
+  useNamadaExtension,
+  Wallet as WalletProps
+} from '@/providers/NamadaExtensionProvider'
 
 function Wallet({ alias, balance, isShielded }: WalletProps) {
   return (
@@ -75,16 +72,9 @@ function Wallet({ alias, balance, isShielded }: WalletProps) {
   )
 }
 
-function Wallets(
-  {
-    wallets,
-    ...props
-  }: RadioGroupProps & {
-    wallets: WalletProps[]
-  },
-  ref: React.Ref<HTMLDivElement>
-) {
+function Wallets(props: RadioGroupProps, ref: React.Ref<HTMLDivElement>) {
   const { error } = useFormField()
+  const { wallets } = useNamadaExtension()
 
   return (
     <ScrollArea

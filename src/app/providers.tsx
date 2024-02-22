@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from 'next-themes'
 import React from 'react'
+import NamadaExtensionProvider from '@/providers/NamadaExtensionProvider'
 
 export default function Providers({
   children
@@ -15,7 +16,7 @@ export default function Providers({
       defaultTheme={'system'}
       attribute={'class'}
     >
-      {children}
+      <NamadaExtensionProvider>{children}</NamadaExtensionProvider>
     </ThemeProvider>
   )
 }

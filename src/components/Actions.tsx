@@ -1,8 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { WalletProps } from '@/components/Wallets'
 import SendForm from '@/components/SendForm'
 
-export default function Actions({ wallets }: { wallets: WalletProps[] }) {
+export default function Actions() {
   return (
     <Tabs defaultValue={'send'}>
       <TabsList className={'w-full text-lg bg-tertiary rounded-full'}>
@@ -14,7 +13,7 @@ export default function Actions({ wallets }: { wallets: WalletProps[] }) {
         </TabsTrigger>
       </TabsList>
       <TabsContent value={'send'}>
-        <SendForm wallets={wallets} />
+        <SendForm />
       </TabsContent>
       <TabsContent value={'receive'}></TabsContent>
     </Tabs>

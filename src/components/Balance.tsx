@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Select,
   SelectContent,
@@ -5,8 +7,14 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { useNamadaExtension } from '@/providers/NamadaExtensionProvider'
 
-export default function Balance({ balance }: { balance: number }) {
+export default function Balance() {
+  const { wallets } = useNamadaExtension()
+  const balance = wallets
+    .map(wallets => wallets.balance)
+    .reduce((val, acc) => acc + val, 0)
+
   return (
     <div className={'flex flex-row justify-between'}>
       <h1 className={'font-medium text-lg'}>Total Balance</h1>

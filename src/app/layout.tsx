@@ -4,6 +4,7 @@ import { Space_Grotesk } from 'next/font/google'
 import './global.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
+import React from 'react'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],

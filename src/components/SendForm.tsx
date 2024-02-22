@@ -15,7 +15,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import Wallets, { WalletProps } from '@/components/Wallets'
-import { getIntegration, Namada } from '@namada/integrations'
+import { Namada } from '@namada/integrations'
+import { chains } from '@namada/chains'
 
 const sendFormSchema = z.object({
   wallet: z.string().min(1, 'Required'),
@@ -36,7 +37,7 @@ export default function SendForm({ wallets }: { wallets: WalletProps[] }) {
   })
 
   async function onSubmit(values: z.infer<typeof sendFormSchema>) {
-    const namada = getIntegration('namada') as Namada
+    const namada = new Namada(chains['namada'])
     if (namada.detect()) {
       await namada.connect()
       console.log(await namada.accounts())

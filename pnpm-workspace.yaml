@@ -1,0 +1,6 @@
+packages:
+  - './namada-interface/packages/integrations'
+  - './namada-interface/packages/config'
+  - './namada-interface/packages/utils'
+  - './namada-interface/packages/types'
+  - './namada-interface/packages/chains'

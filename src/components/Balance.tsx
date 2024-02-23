@@ -7,21 +7,20 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { useNamadaExtension } from '@/providers/NamadaExtensionProvider'
+import { chains } from '@namada/chains'
 
 export default function Balance() {
-  const { wallets } = useNamadaExtension()
-  const balance = wallets
-    .map(wallets => wallets.balance)
-    .reduce((val, acc) => acc + val, 0)
+  const balance = 0
 
   return (
     <div className={'flex flex-row justify-between'}>
       <h1 className={'font-medium text-lg'}>Total Balance</h1>
       <div className={'flex flex-col items-end gap-1'}>
-        <p className={'text-5xl font-bold text-nowrap'}>{balance} NAM</p>
+        <p className={'text-5xl font-bold text-nowrap'}>
+          {balance} {chains.namada.currency.symbol}
+        </p>
         <div className={'flex flex-row gap-1'}>
-          <p className={'font-bold text-secondary'}>$999</p>
+          <p className={'font-bold text-secondary'}>$0</p>
           <Select defaultValue={'usd'}>
             <SelectTrigger
               className={'font-bold align-sub text-secondary min-w-12'}

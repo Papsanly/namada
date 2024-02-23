@@ -6,12 +6,13 @@ import { Label } from '@/components/ui/label'
 import { RadioGroupProps } from '@radix-ui/react-radio-group'
 import React from 'react'
 import { useFormField } from '@/components/ui/form'
-import {
-  useNamadaExtension,
-  Wallet as WalletProps
-} from '@/providers/NamadaExtensionProvider'
+import { useAccounts } from '@/providers/NamadaExtensionProvider'
+import { chains } from '@namada/chains'
+import { Account as AccountProps } from '@namada/types'
 
-function Wallet({ alias, balance, isShielded }: WalletProps) {
+function Account({ alias, address, isShielded }: AccountProps) {
+  const balance = 0
+
   return (
     <div
       className={cn(
@@ -40,13 +41,17 @@ function Wallet({ alias, balance, isShielded }: WalletProps) {
       <div className={'flex flex-col'}>
         <p className={'font-bold text-lg'}>{alias}</p>
         <div className={'flex items-center gap-1'}>
-          <p className={'text-secondary text-xs'}>tnam123123...123123</p>
+          <p className={'text-secondary text-xs'}>
+            {address.slice(0, 8)}...{address.slice(address.length - 4)}
+          </p>
           <FaCopy size={9} className={'text-secondary'} />
         </div>
       </div>
       <div className={'flex flex-col items-end'}>
-        <p className={'text-3xl font-bold'}>{balance} NAM</p>
-        <p className={'text-secondary'}>$999 USD</p>
+        <p className={'text-3xl font-bold'}>
+          {balance} {chains.namada.currency.symbol}
+        </p>
+        <p className={'text-secondary'}>$0 USD</p>
       </div>
       <div
         className={cn(
@@ -72,9 +77,9 @@ function Wallet({ alias, balance, isShielded }: WalletProps) {
   )
 }
 
-function Wallets(props: RadioGroupProps, ref: React.Ref<HTMLDivElement>) {
+function Accounts(props: RadioGroupProps, ref: React.Ref<HTMLDivElement>) {
   const { error } = useFormField()
-  const { wallets } = useNamadaExtension()
+  const accounts = useAccounts()
 
   return (
     <ScrollArea
@@ -85,14 +90,14 @@ function Wallets(props: RadioGroupProps, ref: React.Ref<HTMLDivElement>) {
       )}
     >
       <RadioGroup ref={ref} {...props} className={'flex flex-row gap-1'}>
-        {wallets.map(wallet => (
-          <div key={wallet.id}>
+        {accounts.map(wallet => (
+          <div key={wallet.address}>
             <Label className={'relative'}>
               <RadioGroupItem
                 className={'peer absolute opacity-0'}
-                value={`${wallet.id}`}
+                value={wallet.address}
               />
-              <Wallet {...wallet} />
+              <Account {...wallet} />
             </Label>
           </div>
         ))}
@@ -101,4 +106,4 @@ function Wallets(props: RadioGroupProps, ref: React.Ref<HTMLDivElement>) {
   )
 }
 
-export default React.forwardRef(Wallets)
+export default React.forwardRef(Accounts)

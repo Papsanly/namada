@@ -1,22 +1,28 @@
 'use client'
 
-import { createContext, ReactNode, useContext } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
+import { Namada } from '@namada/integrations'
+import { chains } from '@namada/chains'
+import { Account } from '@namada/types'
 
 type NamadaExtensionContext =
   | {
-      connected: true
-      wallets: Wallet[]
+      isConnected: false
+      connect: () => void
     }
   | {
-      connected: false
+      isConnected: true
+      connect: () => void
+      accounts: readonly Account[]
     }
-
-export type Wallet = {
-  id: number
-  alias: string
-  balance: number
-  isShielded: boolean
-}
 
 const NamadaExtensionContext = createContext<NamadaExtensionContext | null>(
   null
@@ -27,14 +33,34 @@ export default function NamadaExtensionProvider({
 }: {
   children: ReactNode
 }) {
-  const wallets = [
-    { id: 1, alias: 'papsan', balance: 999999, isShielded: true },
-    { id: 2, alias: 'papsan', balance: 1, isShielded: false },
-    { id: 3, alias: 'karman', balance: 0, isShielded: true }
-  ]
+  const [isConnected, setIsIsConnected] = useState(false)
+  const [accounts, setAccounts] = useState<readonly Account[]>([])
+  const namada = useMemo(() => new Namada(chains['namada']), [])
+
+  const connect = useCallback(async () => {
+    try {
+      if (namada.detect()) {
+        await namada.connect()
+      } else {
+        return
+      }
+    } catch (e) {
+      localStorage.removeItem('extension-connected')
+    }
+    const accounts = (await namada.accounts()) ?? []
+    setAccounts(accounts)
+    setIsIsConnected(true)
+    localStorage.setItem('extension-connected', 'true')
+  }, [namada])
+
+  useEffect(() => {
+    if (localStorage.getItem('extension-connected') !== null) {
+      connect().then()
+    }
+  }, [connect])
 
   return (
-    <NamadaExtensionContext.Provider value={{ connected: true, wallets }}>
+    <NamadaExtensionContext.Provider value={{ isConnected, accounts, connect }}>
       {children}
     </NamadaExtensionContext.Provider>
   )
@@ -47,10 +73,13 @@ export function useNamadaExtension() {
       'useNamadaExtension should be used within <NamadaExtensionProvider/>'
     )
   }
-  if (!context.connected) {
-    throw Error(
-      'useNamadaExtension should be used only when extension is connected'
-    )
-  }
   return context
+}
+
+export function useAccounts() {
+  const context = useNamadaExtension()
+  if (!context.isConnected) {
+    throw Error('useAccounts should be used only when extension is connected')
+  }
+  return context.accounts
 }

@@ -14,7 +14,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import Wallets from '@/components/Wallets'
+import Accounts from '@/components/Accounts'
 import { Namada } from '@namada/integrations'
 import { chains } from '@namada/chains'
 
@@ -58,7 +58,7 @@ export default function SendForm() {
               <p className={'text-lg font-bold'}>Select a Wallet</p>
               <FormMessage />
               <FormControl>
-                <Wallets
+                <Accounts
                   {...field}
                   defaultValue={field.value}
                   onValueChange={field.onChange}

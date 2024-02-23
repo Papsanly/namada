@@ -7,7 +7,7 @@ import { useNamadaExtension } from '@/providers/NamadaExtensionProvider'
 import { Button } from '@/components/ui/button'
 
 export default function Home() {
-  const { isConnected, connect } = useNamadaExtension()
+  const namadaExtension = useNamadaExtension()
 
   return (
     <main
@@ -22,13 +22,15 @@ export default function Home() {
         'gap-4'
       )}
     >
-      {isConnected ? (
+      {namadaExtension.isConnected ? (
         <>
           <Balance />
           <Actions />
         </>
       ) : (
-        <Button onClick={connect}>Connect Namada Extension</Button>
+        <Button onClick={namadaExtension.connectWithRetry}>
+          Connect Namada Extension
+        </Button>
       )}
     </main>
   )

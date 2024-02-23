@@ -8,11 +8,9 @@ import React from 'react'
 import { useFormField } from '@/components/ui/form'
 import { useAccounts } from '@/providers/NamadaExtensionProvider'
 import { chains } from '@namada/chains'
-import { Account as AccountProps } from '@namada/types'
+import { Account as AccountProps } from '@/providers/NamadaExtensionProvider'
 
-function Account({ alias, address, isShielded }: AccountProps) {
-  const balance = 0
-
+function Account({ alias, address, balance, isShielded }: AccountProps) {
   return (
     <div
       className={cn(
@@ -49,7 +47,8 @@ function Account({ alias, address, isShielded }: AccountProps) {
       </div>
       <div className={'flex flex-col items-end'}>
         <p className={'text-3xl font-bold'}>
-          {balance} {chains.namada.currency.symbol}
+          {balance === undefined ? '-' : balance}{' '}
+          {chains.namada.currency.symbol}
         </p>
         <p className={'text-secondary'}>$0 USD</p>
       </div>

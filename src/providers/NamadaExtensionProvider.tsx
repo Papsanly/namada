@@ -13,14 +13,16 @@ import { Namada } from '@namada/integrations'
 import { chains } from '@namada/chains'
 import { Account } from '@namada/types'
 
+type ConnectionResult = 'user-rejected' | 'not-detected' | 'success'
+
 type NamadaExtensionContext =
   | {
       isConnected: false
-      connect: () => void
+      connect: () => Promise<ConnectionResult>
     }
   | {
       isConnected: true
-      connect: () => void
+      connect: () => Promise<ConnectionResult>
       accounts: readonly Account[]
     }
 
@@ -37,27 +39,40 @@ export default function NamadaExtensionProvider({
   const [accounts, setAccounts] = useState<readonly Account[]>([])
   const namada = useMemo(() => new Namada(chains['namada']), [])
 
-  const connect = useCallback(async () => {
+  const connect = useCallback(async (): Promise<ConnectionResult> => {
     try {
       if (namada.detect()) {
         await namada.connect()
       } else {
-        return
+        return 'not-detected'
       }
     } catch (e) {
       localStorage.removeItem('extension-connected')
+      return 'user-rejected'
     }
     const accounts = (await namada.accounts()) ?? []
     setAccounts(accounts)
     setIsIsConnected(true)
     localStorage.setItem('extension-connected', 'true')
+    return 'success'
   }, [namada])
+
+  const connectWithRetry = useCallback(
+    async (retryCount = 10, interval = 100) => {
+      for (let attempt = 0; attempt < retryCount; attempt++) {
+        const res = await connect()
+        if (res !== 'not-detected') return
+        await new Promise(resolve => setTimeout(resolve, interval))
+      }
+    },
+    [connect]
+  )
 
   useEffect(() => {
     if (localStorage.getItem('extension-connected') !== null) {
-      connect().then()
+      connectWithRetry().then()
     }
-  }, [connect])
+  }, [connectWithRetry])
 
   return (
     <NamadaExtensionContext.Provider value={{ isConnected, accounts, connect }}>

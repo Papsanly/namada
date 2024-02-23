@@ -4,13 +4,22 @@ import ScrollArea from '@/components/ui/scroll-area'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { RadioGroupProps } from '@radix-ui/react-radio-group'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFormField } from '@/components/ui/form'
-import { useAccounts } from '@/providers/NamadaExtensionProvider'
+import {
+  useAccounts,
+  useQueryBalance
+} from '@/providers/NamadaExtensionProvider'
 import { chains } from '@namada/chains'
 import { Account as AccountProps } from '@/providers/NamadaExtensionProvider'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
+  const queryBalance = useQueryBalance()
+
+  useEffect(() => {
+    queryBalance(address).then()
+  }, [address, queryBalance])
+
   return (
     <div
       className={cn(
@@ -78,7 +87,7 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
 
 function Accounts(props: RadioGroupProps, ref: React.Ref<HTMLDivElement>) {
   const { error } = useFormField()
-  const accounts = useAccounts()
+  const { accounts } = useAccounts()
 
   return (
     <ScrollArea

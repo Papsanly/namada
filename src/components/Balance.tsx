@@ -11,7 +11,7 @@ import { chains } from '@namada/chains'
 import { useAccounts } from '@/providers/NamadaExtensionProvider'
 
 export default function Balance() {
-  const accounts = useAccounts()
+  const { accounts } = useAccounts()
   const loaded = accounts.every(account => account.balance !== undefined)
   const totalBalance = accounts
     .map(account => account.balance)

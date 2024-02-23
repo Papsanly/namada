@@ -2,7 +2,9 @@
 
 import {
   createContext,
+  Dispatch,
   ReactNode,
+  SetStateAction,
   useCallback,
   useContext,
   useEffect,
@@ -20,12 +22,15 @@ type ConnectionResult = 'user-rejected' | 'not-detected' | 'success'
 type NamadaExtensionContext =
   | {
       isConnected: false
+      namada: Namada
       connect: () => Promise<ConnectionResult>
       connectWithRetry: () => Promise<ConnectionResult>
     }
   | {
       isConnected: true
+      namada: Namada
       accounts: Account[]
+      setAccounts: Dispatch<SetStateAction<Account[]>>
     }
 
 const NamadaExtensionContext = createContext<NamadaExtensionContext | null>(
@@ -92,8 +97,10 @@ export default function NamadaExtensionProvider({
   return (
     <NamadaExtensionContext.Provider
       value={{
+        namada,
         isConnected,
         accounts,
+        setAccounts,
         connect,
         connectWithRetry
       }}
@@ -118,5 +125,21 @@ export function useAccounts() {
   if (!context.isConnected) {
     throw Error('useAccounts should be used only when extension is connected')
   }
-  return context.accounts
+  return { accounts: context.accounts, setAccounts: context.setAccounts }
+}
+
+export function useQueryBalance() {
+  const { setAccounts } = useAccounts()
+  const { namada } = useNamadaExtension()
+  return async (address: string) => {
+    const tokenBalances = await namada.queryBalances(address)
+    const namadaBalance = tokenBalances.find(balance => balance.token === 'NAM')
+    const balance =
+      namadaBalance !== undefined ? Number(namadaBalance.amount) : 0
+    setAccounts(accounts =>
+      accounts.map(account =>
+        account.address === address ? { ...account, balance } : account
+      )
+    )
+  }
 }

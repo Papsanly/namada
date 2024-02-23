@@ -28,7 +28,7 @@ export default function Home() {
           <Actions />
         </>
       ) : (
-        <Button onClick={namadaExtension.connectWithRetry}>
+        <Button onClick={() => namadaExtension.connectWithRetry()}>
           Connect Namada Extension
         </Button>
       )}

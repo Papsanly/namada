@@ -12,6 +12,7 @@ import {
 } from '@/providers/NamadaExtensionProvider'
 import { chains } from '@namada/chains'
 import { Account as AccountProps } from '@/providers/NamadaExtensionProvider'
+import { Button } from '@/components/ui/button'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
   const queryBalance = useQueryBalance()
@@ -51,7 +52,14 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
           <p className={'text-secondary text-xs'}>
             {address.slice(0, 8)}...{address.slice(address.length - 4)}
           </p>
-          <FaCopy size={9} className={'text-secondary'} />
+          <Button
+            type={'button'}
+            variant={'ghost'}
+            className={'p-0'}
+            onClick={() => navigator.clipboard.writeText(address.toString())}
+          >
+            <FaCopy size={9} className={'text-secondary'} />
+          </Button>
         </div>
       </div>
       <div className={'flex flex-col items-end'}>

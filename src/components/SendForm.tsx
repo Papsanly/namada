@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils'
 import Accounts from '@/components/Accounts'
 import { Namada } from '@namada/integrations'
 import { chains } from '@namada/chains'
+import { useQueryState } from 'nuqs'
 
 const sendFormSchema = z.object({
   wallet: z.string().min(1, 'Required'),
@@ -26,11 +27,13 @@ const sendFormSchema = z.object({
 })
 
 export default function SendForm() {
+  const [recipient, setRecipient] = useQueryState('recipient')
+
   const form = useForm<z.infer<typeof sendFormSchema>>({
     resolver: zodResolver(sendFormSchema),
     defaultValues: {
       wallet: '',
-      recipient: '',
+      recipient: recipient ?? '',
       amount: 0,
       memo: ''
     }
@@ -78,7 +81,15 @@ export default function SendForm() {
               <FormLabel>Recipient</FormLabel>
               <FormMessage />
               <FormControl>
-                <Input {...field} error={errors.recipient} />
+                <Input
+                  {...field}
+                  onChange={async e => {
+                    const value = e.target.value.trim()
+                    await setRecipient(value === '' ? null : value)
+                    field.onChange(value)
+                  }}
+                  error={errors.recipient}
+                />
               </FormControl>
             </FormItem>
           )}

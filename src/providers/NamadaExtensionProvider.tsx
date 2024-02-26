@@ -128,6 +128,15 @@ export function useAccounts() {
   return { accounts: context.accounts, setAccounts: context.setAccounts }
 }
 
+export function useTotalBalance() {
+  const { accounts } = useAccounts()
+  const loaded = accounts.every(account => account.balance !== undefined)
+  const totalBalance = accounts
+    .map(account => account.balance)
+    .reduce((acc, val) => (acc ?? 0) + (val ?? 0), 0)
+  return loaded ? totalBalance : undefined
+}
+
 export function useQueryBalance() {
   const { setAccounts } = useAccounts()
   const { namada } = useNamadaExtension()

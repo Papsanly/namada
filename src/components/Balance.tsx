@@ -7,17 +7,13 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { useAccounts } from '@/providers/NamadaExtensionProvider'
+import { useTotalBalance } from '@/providers/NamadaExtensionProvider'
 import LoadingSpinner from '@/assets/LoadingSpinner'
 import { Tokens } from '@namada/types'
 import { cn } from '@/lib/utils'
 
 export default function Balance() {
-  const { accounts } = useAccounts()
-  const loaded = accounts.every(account => account.balance !== undefined)
-  const totalBalance = accounts
-    .map(account => account.balance)
-    .reduce((acc, val) => (acc ?? 0) + (val ?? 0), 0)
+  const balance = useTotalBalance()
 
   return (
     <div className={'flex flex-row justify-between'}>
@@ -34,7 +30,7 @@ export default function Balance() {
             'text-nowrap'
           )}
         >
-          {loaded ? totalBalance : <LoadingSpinner height={30} />}{' '}
+          {balance !== undefined ? balance : <LoadingSpinner height={30} />}{' '}
           {Tokens['NAM'].symbol}
         </div>
         <div className={'flex flex-row gap-1'}>

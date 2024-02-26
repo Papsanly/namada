@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import SendForm from '@/components/SendForm'
+import Receive from '@/components/Receive'
 
 export default function Actions() {
   return (
@@ -15,7 +16,9 @@ export default function Actions() {
       <TabsContent value={'send'}>
         <SendForm />
       </TabsContent>
-      <TabsContent value={'receive'}></TabsContent>
+      <TabsContent value={'receive'}>
+        <Receive />
+      </TabsContent>
     </Tabs>
   )
 }

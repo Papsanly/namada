@@ -1,6 +1,6 @@
 import Providers from './providers'
 import type { Metadata } from 'next'
-import { Space_Grotesk } from 'next/font/google'
+import { JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import './global.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
@@ -9,6 +9,11 @@ import React from 'react'
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk'
+})
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono'
 })
 
 export const metadata: Metadata = {
@@ -31,7 +36,8 @@ export default function RootLayout({
           'items-center',
           'w-full',
           'container',
-          spaceGrotesk.variable
+          spaceGrotesk.variable,
+          jetBrainsMono.variable
         )}
       >
         <Providers>

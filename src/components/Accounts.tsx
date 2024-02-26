@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { FieldError } from 'react-hook-form'
 import LoadingSpinner from '@/assets/LoadingSpinner'
 import { Tokens } from '@namada/types'
+import CopyButton from '@/components/CopyButton'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
   const queryBalance = useQueryBalance()
@@ -55,22 +56,7 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
           <p className={'text-secondary text-xs'}>
             {address.slice(0, 8)}...{address.slice(address.length - 4)}
           </p>
-          <Button
-            type={'button'}
-            variant={'ghost'}
-            className={'p-0'}
-            onClick={async () => {
-              await navigator.clipboard.writeText(address.toString())
-              setCopied(true)
-              setTimeout(() => setCopied(false), 3000)
-            }}
-          >
-            {copied ? (
-              <MdDone size={12} className={'text-secondary'} />
-            ) : (
-              <FaCopy size={9} className={'text-secondary'} />
-            )}
-          </Button>
+          <CopyButton size={9} value={address} className={'text-secondary'} />
         </div>
       </div>
       <div className={'flex flex-col items-end'}>

@@ -63,6 +63,14 @@
       theme('backgroundColor.secondary')
     );
   }
+
+  .code {
+    @apply px-3 py-1 bg-tertiary rounded-sm;
+  }
+
+  .code code {
+    @apply font-jetbrains-mono;
+  }
 }
 
 :root {

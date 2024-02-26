@@ -39,7 +39,8 @@ const config = {
         destructive: 'var(--border-destructive)'
       },
       fontFamily: {
-        'space-grotesk': ['var(--font-space-grotesk)', ...fontFamily.sans]
+        'space-grotesk': ['var(--font-space-grotesk)', ...fontFamily.sans],
+        'jetbrains-mono': ['var(--font-jetbrains-mono)', ...fontFamily.mono]
       },
       colors: {
         accent: 'var(--accent)',

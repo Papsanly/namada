@@ -137,7 +137,7 @@ export function useQueryBalance() {
     ])
     const namadaBalance = tokenBalances.find(balance => balance.token === 'NAM')
     const balance =
-      namadaBalance !== undefined ? Number(namadaBalance.amount) : 0
+      namadaBalance !== undefined ? Number(namadaBalance.amount) : NaN
     setAccounts(accounts =>
       accounts.map(account =>
         account.address === address ? { ...account, balance } : account

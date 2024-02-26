@@ -10,9 +10,11 @@ import {
   useAccounts,
   useQueryBalance
 } from '@/providers/NamadaExtensionProvider'
-import { chains } from '@namada/chains'
 import { Account as AccountProps } from '@/providers/NamadaExtensionProvider'
 import { Button } from '@/components/ui/button'
+import { FieldError } from 'react-hook-form'
+import LoadingSpinner from '@/assets/LoadingSpinner'
+import { Tokens } from '@namada/types'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
   const queryBalance = useQueryBalance()
@@ -63,10 +65,10 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
         </div>
       </div>
       <div className={'flex flex-col items-end'}>
-        <p className={'text-3xl font-bold'}>
-          {balance === undefined ? '-' : balance}{' '}
-          {chains.namada.currency.symbol}
-        </p>
+        <div className={'flex flex-row gap-1 items-center text-3xl font-bold'}>
+          {balance === undefined ? <LoadingSpinner height={20} /> : balance}{' '}
+          {Tokens['NAM'].symbol}
+        </div>
         <p className={'text-secondary'}>$0 USD</p>
       </div>
       <div

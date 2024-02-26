@@ -9,6 +9,9 @@ import {
 } from '@/components/ui/select'
 import { chains } from '@namada/chains'
 import { useAccounts } from '@/providers/NamadaExtensionProvider'
+import LoadingSpinner from '@/assets/LoadingSpinner'
+import { Tokens } from '@namada/types'
+import { cn } from '@/lib/utils'
 
 export default function Balance() {
   const { accounts } = useAccounts()
@@ -21,9 +24,20 @@ export default function Balance() {
     <div className={'flex flex-row justify-between'}>
       <h1 className={'font-medium text-lg'}>Total Balance</h1>
       <div className={'flex flex-col items-end gap-1'}>
-        <p className={'text-5xl font-bold text-nowrap'}>
-          {loaded ? totalBalance : '-'} {chains.namada.currency.symbol}
-        </p>
+        <div
+          className={cn(
+            'flex',
+            'flex-row',
+            'gap-1',
+            'items-center',
+            'text-5xl',
+            'font-bold',
+            'text-nowrap'
+          )}
+        >
+          {loaded ? totalBalance : <LoadingSpinner height={30} />}{' '}
+          {Tokens['NAM'].symbol}
+        </div>
         <div className={'flex flex-row gap-1'}>
           <p className={'font-bold text-secondary'}>$0</p>
           <Select defaultValue={'usd'}>

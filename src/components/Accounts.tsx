@@ -104,8 +104,10 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
   )
 }
 
-function Accounts(props: RadioGroupProps, ref: React.Ref<HTMLDivElement>) {
-  const { error } = useFormField()
+function Accounts(
+  props: RadioGroupProps & { error?: FieldError },
+  ref: React.Ref<HTMLDivElement>
+) {
   const { accounts } = useAccounts()
 
   return (
@@ -113,7 +115,7 @@ function Accounts(props: RadioGroupProps, ref: React.Ref<HTMLDivElement>) {
       className={cn(
         'rounded-sm',
         'has-[:focus-visible]:default-ring',
-        error && 'border-2 border-destructive'
+        props.error && 'border-2 border-destructive'
       )}
     >
       <RadioGroup ref={ref} {...props} className={'flex flex-row gap-1'}>

@@ -1,15 +1,15 @@
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
-import { useFormField } from '@/components/ui/form'
+import { FieldError } from 'react-hook-form'
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: FieldError
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, name, ...props }, ref) => {
-    const { error } = useFormField()
-
+  ({ className, type, error, name, ...props }, ref) => {
     return (
       <input
         type={type}

@@ -7,7 +7,6 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { chains } from '@namada/chains'
 import { useAccounts } from '@/providers/NamadaExtensionProvider'
 import LoadingSpinner from '@/assets/LoadingSpinner'
 import { Tokens } from '@namada/types'

@@ -47,6 +47,8 @@ export default function SendForm() {
     }
   }
 
+  const { errors } = form.formState
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -60,6 +62,7 @@ export default function SendForm() {
               <FormControl>
                 <Accounts
                   {...field}
+                  error={errors.wallet}
                   defaultValue={field.value}
                   onValueChange={field.onChange}
                 />
@@ -75,7 +78,7 @@ export default function SendForm() {
               <FormLabel>Recipient</FormLabel>
               <FormMessage />
               <FormControl>
-                <Input {...field} />
+                <Input {...field} error={errors.recipient} />
               </FormControl>
             </FormItem>
           )}
@@ -89,7 +92,7 @@ export default function SendForm() {
               <FormMessage />
               <div className={'relative'}>
                 <FormControl>
-                  <Input {...field} type={'number'} />
+                  <Input {...field} type={'number'} error={errors.amount} />
                 </FormControl>
                 <Button
                   type={'button'}
@@ -115,7 +118,7 @@ export default function SendForm() {
             <FormItem>
               <FormLabel>Memo</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} error={errors.memo} />
               </FormControl>
               <FormMessage />
             </FormItem>

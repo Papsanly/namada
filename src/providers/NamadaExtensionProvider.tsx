@@ -13,7 +13,7 @@ import {
 } from 'react'
 import { Namada } from '@namada/integrations'
 import { chains } from '@namada/chains'
-import { Account as NamadaAccount } from '@namada/types'
+import { Account as NamadaAccount, Tokens } from '@namada/types'
 
 export type Account = NamadaAccount & { balance: number | undefined }
 
@@ -132,7 +132,9 @@ export function useQueryBalance() {
   const { setAccounts } = useAccounts()
   const { namada } = useNamadaExtension()
   return async (address: string) => {
-    const tokenBalances = await namada.queryBalances(address)
+    const tokenBalances = await namada.queryBalances(address, [
+      Tokens['NAM'].address
+    ])
     const namadaBalance = tokenBalances.find(balance => balance.token === 'NAM')
     const balance =
       namadaBalance !== undefined ? Number(namadaBalance.amount) : 0

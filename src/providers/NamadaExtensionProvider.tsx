@@ -30,6 +30,7 @@ type NamadaExtensionContext =
       isConnected: true
       namada: Namada
       accounts: Account[]
+      defaultAccountAddress: string
       setAccounts: Dispatch<SetStateAction<Account[]>>
     }
 
@@ -62,12 +63,14 @@ export default function NamadaExtensionProvider({
 }) {
   const [isConnected, setIsConnected] = useState(false)
   const [accounts, setAccounts] = useState<Account[]>([])
+  const [defaultAccountAddress, setDefaultAccountAddress] = useState('')
   const namada = useMemo(() => new Namada(chains['namada']), [])
 
   const connect = useCallback(async (): Promise<ConnectionResult> => {
     const connectionResult = await connectExtension(namada)
     if (connectionResult === 'success') {
       setAccounts(await fetchAccounts(namada))
+      setDefaultAccountAddress((await namada.defaultAccount())?.address ?? '')
       setIsConnected(true)
       localStorage.setItem('extension-connected', 'true')
     } else if (connectionResult === 'user-rejected') {
@@ -100,6 +103,7 @@ export default function NamadaExtensionProvider({
         namada,
         isConnected,
         accounts,
+        defaultAccountAddress,
         setAccounts,
         connect,
         connectWithRetry
@@ -120,12 +124,20 @@ export function useNamadaExtension() {
   return context
 }
 
-export function useAccounts() {
+export function useConnectedNamadaExtension() {
   const context = useNamadaExtension()
   if (!context.isConnected) {
     throw Error('useAccounts should be used only when extension is connected')
   }
-  return { accounts: context.accounts, setAccounts: context.setAccounts }
+  return context
+}
+
+export function useAccounts() {
+  const context = useConnectedNamadaExtension()
+  return {
+    accounts: context.accounts,
+    defaultAccountAddress: context.defaultAccountAddress
+  }
 }
 
 export function useTotalBalance() {
@@ -138,8 +150,7 @@ export function useTotalBalance() {
 }
 
 export function useQueryBalance() {
-  const { setAccounts } = useAccounts()
-  const { namada } = useNamadaExtension()
+  const { namada, setAccounts } = useConnectedNamadaExtension()
   return async (address: string) => {
     const tokenBalances = await namada.queryBalances(address, [
       Tokens['NAM'].address

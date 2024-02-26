@@ -18,6 +18,7 @@ import Accounts from '@/components/Accounts'
 import { Namada } from '@namada/integrations'
 import { chains } from '@namada/chains'
 import { useQueryState } from 'nuqs'
+import { useAccounts } from '@/providers/NamadaExtensionProvider'
 
 const sendFormSchema = z.object({
   wallet: z.string().min(1, 'Required'),
@@ -28,11 +29,12 @@ const sendFormSchema = z.object({
 
 export default function SendForm() {
   const [recipient, setRecipient] = useQueryState('recipient')
+  const { defaultAccountAddress } = useAccounts()
 
   const form = useForm<z.infer<typeof sendFormSchema>>({
     resolver: zodResolver(sendFormSchema),
     defaultValues: {
-      wallet: '',
+      wallet: defaultAccountAddress,
       recipient: recipient ?? '',
       amount: 0,
       memo: ''

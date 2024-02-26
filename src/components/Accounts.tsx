@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils'
 import { FaCopy } from 'react-icons/fa6'
+import { MdDone } from 'react-icons/md'
 import ScrollArea from '@/components/ui/scroll-area'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { RadioGroupProps } from '@radix-ui/react-radio-group'
-import React, { useEffect } from 'react'
-import { useFormField } from '@/components/ui/form'
+import React, { useEffect, useState } from 'react'
 import {
   useAccounts,
   useQueryBalance
@@ -18,6 +18,7 @@ import { Tokens } from '@namada/types'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
   const queryBalance = useQueryBalance()
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     queryBalance(address).then()
@@ -58,9 +59,17 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
             type={'button'}
             variant={'ghost'}
             className={'p-0'}
-            onClick={() => navigator.clipboard.writeText(address.toString())}
+            onClick={async () => {
+              await navigator.clipboard.writeText(address.toString())
+              setCopied(true)
+              setTimeout(() => setCopied(false), 3000)
+            }}
           >
-            <FaCopy size={9} className={'text-secondary'} />
+            {copied ? (
+              <MdDone size={12} className={'text-secondary'} />
+            ) : (
+              <FaCopy size={9} className={'text-secondary'} />
+            )}
           </Button>
         </div>
       </div>

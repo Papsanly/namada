@@ -153,11 +153,10 @@ export function useQueryBalance() {
   const { namada, setAccounts } = useConnectedNamadaExtension()
   return useCallback(
     async (address: string) => {
-      const tokenBalances = await namada.queryBalances(address, [
-        Tokens['NAM'].address
-      ])
+      const tokenAddress = (await namada.getChain())?.currency.address ?? ''
+      const tokenBalances = await namada.queryBalances(address, [tokenAddress])
       const namadaBalance = tokenBalances.find(
-        balance => balance.token === Tokens['NAM'].address
+        balance => balance.token === 'NAM'
       )
       const balance =
         namadaBalance !== undefined ? Number(namadaBalance.amount) : NaN

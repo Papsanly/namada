@@ -15,20 +15,25 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import Accounts from '@/components/Accounts'
-import { Namada } from '@namada/integrations'
-import { chains } from '@namada/chains'
 import { useQueryState } from 'nuqs'
-import { useAccounts } from '@/providers/NamadaExtensionProvider'
+import {
+  useAccounts,
+  useConnectedNamadaExtension
+} from '@/providers/NamadaExtensionProvider'
+import BigNumber from 'bignumber.js'
+import { AccountType, TransferMsgValue, TxMsgValue } from '@namada/types'
 
 const sendFormSchema = z.object({
   wallet: z.string().min(1, 'Required'),
   recipient: z.string().min(1, 'Required'),
   amount: z.coerce.number().positive('Must be greater than 0'),
+  fee: z.coerce.number().positive('Must be greater than 0'),
   memo: z.string()
 })
 
 export default function SendForm() {
   const [recipient, setRecipient] = useQueryState('recipient')
+  const { namada } = useConnectedNamadaExtension()
   const { accounts } = useAccounts()
   const { defaultAccountAddress } = useAccounts()
 
@@ -38,18 +43,48 @@ export default function SendForm() {
       wallet: defaultAccountAddress,
       recipient: recipient ?? '',
       amount: 0,
+      fee: 0,
       memo: ''
     }
   })
 
   async function onSubmit(values: z.infer<typeof sendFormSchema>) {
-    const namada = new Namada(chains['namada'])
-    if (namada.detect()) {
-      await namada.connect()
-      console.log(await namada.accounts())
-      console.log(values)
-    } else {
-      console.log('Namada extension not detected')
+    const chain = await namada.getChain()
+    if (!chain) return
+    const { address: token } = chain.currency
+    if (!token) return
+
+    const args: TransferMsgValue = {
+      source: values.wallet,
+      target: values.recipient,
+      token,
+      amount: new BigNumber(values.amount),
+      nativeToken: token
+    }
+
+    const publicKey = accounts.find(
+      account => account.address === values.wallet
+    )?.publicKey
+
+    const gasLimit = 20000
+
+    const txArgs: TxMsgValue = {
+      token,
+      feeAmount: new BigNumber(values.fee / gasLimit),
+      gasLimit: new BigNumber(gasLimit),
+      chainId: chain.chainId,
+      publicKey,
+      memo: values.memo
+    }
+
+    const signer = namada.signer()
+    if (!signer) return
+
+    try {
+      await signer.submitTransfer(args, txArgs, AccountType.Mnemonic)
+      console.log('Transaction was approved by user and submitted via the SDK')
+    } catch (e) {
+      console.error(`Transaction was rejected: ${e}`)
     }
   }
 
@@ -131,6 +166,19 @@ export default function SendForm() {
                   MAX
                 </Button>
               </div>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name={'fee'}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Fee</FormLabel>
+              <FormControl>
+                <Input {...field} error={errors.fee} />
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

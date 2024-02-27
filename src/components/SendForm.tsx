@@ -29,6 +29,7 @@ const sendFormSchema = z.object({
 
 export default function SendForm() {
   const [recipient, setRecipient] = useQueryState('recipient')
+  const { accounts } = useAccounts()
   const { defaultAccountAddress } = useAccounts()
 
   const form = useForm<z.infer<typeof sendFormSchema>>({
@@ -117,6 +118,15 @@ export default function SendForm() {
                     'top-[50%]',
                     'translate-y-[-50%]'
                   )}
+                  onClick={() => {
+                    const activeWallet = form.getValues().wallet
+                    const activeBalance = accounts.find(
+                      account => account.address == activeWallet
+                    )?.balance
+                    if (activeBalance !== undefined && !isNaN(activeBalance)) {
+                      form.setValue('amount', activeBalance)
+                    }
+                  }}
                 >
                   MAX
                 </Button>

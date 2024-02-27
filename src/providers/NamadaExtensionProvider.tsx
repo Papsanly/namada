@@ -13,7 +13,7 @@ import {
 } from 'react'
 import { Namada } from '@namada/integrations'
 import { chains } from '@namada/chains'
-import { Account as NamadaAccount, Tokens } from '@namada/types'
+import { Account as NamadaAccount } from '@namada/types'
 
 export type Account = NamadaAccount & { balance: number | undefined }
 

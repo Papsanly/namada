@@ -1,17 +1,14 @@
 import { cn } from '@/lib/utils'
-import { FaCopy } from 'react-icons/fa6'
-import { MdDone } from 'react-icons/md'
 import ScrollArea from '@/components/ui/scroll-area'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { RadioGroupProps } from '@radix-ui/react-radio-group'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   useAccounts,
   useQueryBalance
 } from '@/providers/NamadaExtensionProvider'
 import { Account as AccountProps } from '@/providers/NamadaExtensionProvider'
-import { Button } from '@/components/ui/button'
 import { FieldError } from 'react-hook-form'
 import LoadingSpinner from '@/assets/LoadingSpinner'
 import { Tokens } from '@namada/types'
@@ -19,7 +16,6 @@ import CopyButton from '@/components/CopyButton'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
   const queryBalance = useQueryBalance()
-  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     queryBalance(address).then()

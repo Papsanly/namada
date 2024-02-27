@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react'
 import { useAccounts } from '@/providers/NamadaExtensionProvider'
 import QRCode from 'qrcode.react'
 import { usePathname } from 'next/navigation'
-import { FaCopy } from 'react-icons/fa6'
-import { Button } from '@/components/ui/button'
 import CopyButton from '@/components/CopyButton'
 
 export default function Receive() {

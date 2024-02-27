@@ -151,6 +151,7 @@ export function useTotalBalance() {
 
 export function useQueryBalance() {
   const { namada, setAccounts } = useConnectedNamadaExtension()
+  console.log('Balance query')
   return async (address: string) => {
     const tokenBalances = await namada.queryBalances(address, [
       Tokens['NAM'].address

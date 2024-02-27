@@ -9,7 +9,8 @@
   border-radius: 50%;
   border-width: 6px;
   border-style: solid;
-  border-color: #fff transparent #fff transparent;
+  border-color: theme('textColor.primary') transparent
+    theme('textColor.primary') transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {

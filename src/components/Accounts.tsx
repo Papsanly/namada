@@ -97,21 +97,26 @@ function Accounts(
 
   return (
     <div className={'flex flex-col'}>
-      <ScrollArea
-        gradients={!viewAll}
+      <RadioGroup
+        ref={ref}
+        {...props}
         className={cn(
+          'flex',
+          'flex-col',
           'rounded-sm',
           'has-[:focus-visible]:default-ring',
           props.error && 'border-2 border-destructive'
         )}
       >
-        <RadioGroup
-          ref={ref}
-          {...props}
-          className={cn('flex flex-row gap-1', viewAll && 'flex-col')}
+        <ScrollArea
+          gradients={!viewAll}
+          className={cn(
+            'flex flex-row gap-1 snap-x snap-mandatory',
+            viewAll && 'flex-col'
+          )}
         >
           {accounts.map(wallet => (
-            <div key={wallet.address}>
+            <div key={wallet.address} className={'snap-center'}>
               <Label className={'relative'}>
                 <RadioGroupItem
                   className={'peer absolute opacity-0'}
@@ -121,8 +126,8 @@ function Accounts(
               </Label>
             </div>
           ))}
-        </RadioGroup>
-      </ScrollArea>
+        </ScrollArea>
+      </RadioGroup>
       <Button
         type={'button'}
         variant={'ghost'}

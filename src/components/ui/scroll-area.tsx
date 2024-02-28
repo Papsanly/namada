@@ -43,7 +43,7 @@ export default function ScrollArea({
   }, [])
 
   return (
-    <div className={cn('relative', className)} {...props}>
+    <div className={'relative'} {...props}>
       {gradients && (
         <>
           <div
@@ -70,7 +70,7 @@ export default function ScrollArea({
           />
         </>
       )}
-      <div className={'overflow-x-scroll'} ref={ref}>
+      <div className={cn('overflow-x-scroll', className)} ref={ref}>
         {children}
       </div>
     </div>

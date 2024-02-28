@@ -14,9 +14,10 @@ function isScrolledToMaxLeft(element: HTMLElement) {
 
 export default function ScrollArea({
   children,
+  gradients,
   className,
   ...props
-}: React.HTMLProps<HTMLDivElement>) {
+}: React.HTMLProps<HTMLDivElement> & { gradients: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
   const [scrollMaxToLeft, setScrollMaxToLeft] = useState(true)
   const [scrollMaxToRight, setScrollMaxToRight] = useState(true)
@@ -43,28 +44,32 @@ export default function ScrollArea({
 
   return (
     <div className={cn('relative', className)} {...props}>
-      <div
-        className={cn(
-          'absolute',
-          'inset-0',
-          'pointer-events-none',
-          'transition-opacity',
-          'list-gradient-left',
-          'z-10',
-          scrollMaxToLeft && 'opacity-0'
-        )}
-      />
-      <div
-        className={cn(
-          'absolute',
-          'inset-0',
-          'pointer-events-none',
-          'transition-opacity',
-          'list-gradient-right',
-          'z-10',
-          scrollMaxToRight && 'opacity-0'
-        )}
-      />
+      {gradients && (
+        <>
+          <div
+            className={cn(
+              'absolute',
+              'inset-0',
+              'pointer-events-none',
+              'transition-opacity',
+              'list-gradient-left',
+              'z-10',
+              scrollMaxToLeft && 'opacity-0'
+            )}
+          />
+          <div
+            className={cn(
+              'absolute',
+              'inset-0',
+              'pointer-events-none',
+              'transition-opacity',
+              'list-gradient-right',
+              'z-10',
+              scrollMaxToRight && 'opacity-0'
+            )}
+          />
+        </>
+      )}
       <div className={'overflow-x-scroll'} ref={ref}>
         {children}
       </div>

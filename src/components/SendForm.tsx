@@ -34,8 +34,7 @@ const sendFormSchema = z.object({
 export default function SendForm() {
   const [recipient, setRecipient] = useQueryState('recipient')
   const { namada } = useConnectedNamadaExtension()
-  const { accounts } = useAccounts()
-  const { defaultAccountAddress } = useAccounts()
+  const { accounts, defaultAccountAddress } = useAccounts()
 
   const form = useForm<z.infer<typeof sendFormSchema>>({
     resolver: zodResolver(sendFormSchema),

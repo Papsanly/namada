@@ -3,7 +3,7 @@ import ScrollArea from '@/components/ui/scroll-area'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { RadioGroupProps } from '@radix-ui/react-radio-group'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   useAccounts,
   useQueryBalance
@@ -13,6 +13,8 @@ import { FieldError } from 'react-hook-form'
 import LoadingSpinner from '@/assets/LoadingSpinner'
 import { Tokens } from '@namada/types'
 import CopyButton from '@/components/CopyButton'
+import { FaCaretDown, FaCaretUp } from 'react-icons/fa'
+import { Button } from '@/components/ui/button'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
   const queryBalance = useQueryBalance()
@@ -91,29 +93,46 @@ function Accounts(
   ref: React.Ref<HTMLDivElement>
 ) {
   const { accounts } = useAccounts()
+  const [viewAll, setViewAll] = useState(false)
 
   return (
-    <ScrollArea
-      className={cn(
-        'rounded-sm',
-        'has-[:focus-visible]:default-ring',
-        props.error && 'border-2 border-destructive'
-      )}
-    >
-      <RadioGroup ref={ref} {...props} className={'flex flex-row gap-1'}>
-        {accounts.map(wallet => (
-          <div key={wallet.address}>
-            <Label className={'relative'}>
-              <RadioGroupItem
-                className={'peer absolute opacity-0'}
-                value={wallet.address}
-              />
-              <Account {...wallet} />
-            </Label>
-          </div>
-        ))}
-      </RadioGroup>
-    </ScrollArea>
+    <div className={'flex flex-col'}>
+      <ScrollArea
+        gradients={!viewAll}
+        className={cn(
+          'rounded-sm',
+          'has-[:focus-visible]:default-ring',
+          props.error && 'border-2 border-destructive'
+        )}
+      >
+        <RadioGroup
+          ref={ref}
+          {...props}
+          className={cn('flex flex-row gap-1', viewAll && 'flex-col')}
+        >
+          {accounts.map(wallet => (
+            <div key={wallet.address}>
+              <Label className={'relative'}>
+                <RadioGroupItem
+                  className={'peer absolute opacity-0'}
+                  value={wallet.address}
+                />
+                <Account {...wallet} />
+              </Label>
+            </div>
+          ))}
+        </RadioGroup>
+      </ScrollArea>
+      <Button
+        type={'button'}
+        variant={'ghost'}
+        size={'ghost'}
+        className={'mr-auto ml-auto text-secondary'}
+        onClick={() => setViewAll(x => !x)}
+      >
+        {viewAll ? <FaCaretUp /> : <FaCaretDown />}
+      </Button>
+    </div>
   )
 }
 

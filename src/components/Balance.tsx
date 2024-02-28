@@ -25,9 +25,10 @@ export default function Balance() {
       <h1 className={'font-medium text-lg'}>Total Balance</h1>
       <div className={'flex flex-col items-end gap-1'}>
         <DisplayBalance
-          onReload={async () => {
+          onReload={() => {
             accounts.forEach(account => {
-              if (account.balance === undefined) queryBalance(account.address)
+              if (account.balance !== undefined && isNaN(account.balance))
+                queryBalance(account.address).then()
             })
           }}
           size={30}

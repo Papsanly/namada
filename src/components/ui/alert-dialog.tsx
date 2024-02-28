@@ -21,7 +21,8 @@ const AlertDialogOverlay = React.forwardRef<
       'fixed',
       'inset-0',
       'z-50',
-      'bg-black/80',
+      'bg-black/20',
+      'backdrop-blur-sm',
       'data-[state=open]:animate-in',
       'data-[state=closed]:animate-out',
       'data-[state=closed]:fade-out-0',
@@ -48,7 +49,7 @@ const AlertDialogContent = React.forwardRef<
         'top-[50%]',
         'z-50',
         'grid',
-        'w-full',
+        'w-[calc(100%-theme("spacing.4"))]',
         'max-w-lg',
         'translate-x-[-50%]',
         'translate-y-[-50%]',
@@ -98,7 +99,7 @@ const AlertDialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      'flex flex-col-reverse  sm:flex-row sm:justify-end sm:space-x-2',
+      'flex flex-row gap-2',
       'bg-secondary p-1 rounded-full',
       className
     )}
@@ -153,7 +154,6 @@ const AlertDialogCancel = React.forwardRef<
     className={cn(
       buttonVariants({ variant: 'secondary' }),
       'w-full text-primary shadow-none rounded-full',
-      'mt-2 sm:mt-0',
       className
     )}
     {...props}

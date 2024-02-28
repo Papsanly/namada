@@ -26,7 +26,7 @@ export default function Home() {
       className={cn(
         'flex',
         'flex-col',
-        'w-full',
+        'w-[calc(100%-theme(spacing.8))]',
         'bg-secondary',
         'max-w-[625px]',
         'rounded-sm',

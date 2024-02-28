@@ -12,7 +12,6 @@ export default function Background() {
 
   useEffect(() => {
     const mouseMoveHandler = (e: MouseEvent) => {
-      console.log(e.x, e.y)
       setPos({
         x: (e.x / window.innerWidth) * 100,
         y: (e.y / window.innerHeight) * 100

@@ -32,7 +32,6 @@ export default function RootLayout({
         className={cn(
           'flex',
           'flex-col',
-          'gap-8',
           'items-center',
           'w-full',
           'container',

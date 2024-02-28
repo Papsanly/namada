@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply bg-primary text-primary p-4;
+    @apply bg-primary text-primary pb-4;
   }
 
   *:focus-visible,

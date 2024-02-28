@@ -5,6 +5,7 @@ import './global.css'
 import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
 import React from 'react'
+import Background from '@/components/Background'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -34,7 +35,6 @@ export default function RootLayout({
           'flex-col',
           'items-center',
           'w-full',
-          'container',
           spaceGrotesk.variable,
           jetBrainsMono.variable
         )}
@@ -42,6 +42,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <Background />
         </Providers>
       </body>
     </html>

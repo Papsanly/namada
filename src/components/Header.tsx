@@ -31,9 +31,9 @@ export default function Header() {
         'items-center',
         'w-full',
         'gap-1',
-        'backdrop-blur-lg',
+        'backdrop-blur-sm',
         'transition-shadow',
-        scroll !== 0 && 'shadow-lg'
+        'shadow-sm'
       )}
     >
       <div className={'flex flex-1 justify-start min-w-[165px]'}>

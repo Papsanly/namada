@@ -90,6 +90,8 @@
   --border-primary: #000000;
   --border-secondary: #a8a8a8;
   --border-destructive: #dc2626;
+
+  --main-page-background: rgba(151, 151, 176, 0.31);
 }
 
 .dark {
@@ -109,4 +111,6 @@
   --border-primary: #f1f1f1;
   --border-secondary: #a1a1a1;
   --border-destructive: #f87171;
+
+  --main-page-background: rgba(38, 39, 45, 0.6);
 }

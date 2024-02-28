@@ -27,9 +27,10 @@ export default function Home() {
         'flex',
         'flex-col',
         'w-[calc(100%-theme(spacing.8))]',
-        'bg-secondary',
-        'max-w-[625px]',
+        'bg-[var(--main-page-background)]',
         'rounded-sm',
+        'backdrop-blur-sm',
+        'max-w-[625px]',
         'p-4',
         'gap-4'
       )}

@@ -7,32 +7,33 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { useTotalBalance } from '@/providers/NamadaExtensionProvider'
-import LoadingSpinner from '@/assets/LoadingSpinner'
-import { Tokens } from '@namada/types'
-import { cn } from '@/lib/utils'
+import {
+  useAccounts,
+  useQueryBalance,
+  useTotalBalance
+} from '@/providers/NamadaExtensionProvider'
+import React from 'react'
+import DisplayBalance from '@/components/DisplayBalance'
 
 export default function Balance() {
   const balance = useTotalBalance()
+  const { accounts } = useAccounts()
+  const queryBalance = useQueryBalance()
 
   return (
     <div className={'flex flex-row justify-between'}>
       <h1 className={'font-medium text-lg'}>Total Balance</h1>
       <div className={'flex flex-col items-end gap-1'}>
-        <div
-          className={cn(
-            'flex',
-            'flex-row',
-            'gap-1',
-            'items-center',
-            'text-5xl',
-            'font-bold',
-            'text-nowrap'
-          )}
-        >
-          {balance !== undefined ? balance : <LoadingSpinner height={30} />}{' '}
-          {Tokens['NAM'].symbol}
-        </div>
+        <DisplayBalance
+          onReload={async () => {
+            accounts.forEach(account => {
+              if (account.balance === undefined) queryBalance(account.address)
+            })
+          }}
+          size={30}
+          className={'text-5xl'}
+          balance={balance}
+        />
         <div className={'flex flex-row gap-1'}>
           <p className={'font-bold text-secondary'}>$0</p>
           <Select defaultValue={'usd'}>

@@ -143,7 +143,6 @@ export default function SendForm() {
                   <Input {...field} type={'number'} error={errors.amount} />
                 </FormControl>
                 <Button
-                  type={'button'}
                   variant={'secondary'}
                   size={'sm'}
                   className={cn(

@@ -10,11 +10,10 @@ import {
 } from '@/providers/NamadaExtensionProvider'
 import { Account as AccountProps } from '@/providers/NamadaExtensionProvider'
 import { FieldError } from 'react-hook-form'
-import LoadingSpinner from '@/assets/LoadingSpinner'
-import { Tokens } from '@namada/types'
 import CopyButton from '@/components/CopyButton'
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
+import DisplayBalance from '@/components/DisplayBalance'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
   const queryBalance = useQueryBalance()
@@ -58,10 +57,10 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
         </div>
       </div>
       <div className={'flex flex-col items-end'}>
-        <div className={'flex flex-row gap-1 items-center text-3xl font-bold'}>
-          {balance === undefined ? <LoadingSpinner height={20} /> : balance}{' '}
-          {Tokens['NAM'].symbol}
-        </div>
+        <DisplayBalance
+          onReload={() => queryBalance(address)}
+          balance={balance}
+        />
         <p className={'text-secondary'}>$0 USD</p>
       </div>
       <div
@@ -89,7 +88,7 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
 }
 
 function Accounts(
-  props: RadioGroupProps & { error?: FieldError },
+  { error, ...props }: RadioGroupProps & { error?: FieldError },
   ref: React.Ref<HTMLDivElement>
 ) {
   const { accounts } = useAccounts()
@@ -105,7 +104,7 @@ function Accounts(
           'flex-col',
           'rounded-sm',
           'has-[:focus-visible]:default-ring',
-          props.error && 'border-2 border-destructive'
+          error && 'border-2 border-destructive'
         )}
       >
         <ScrollArea
@@ -129,7 +128,6 @@ function Accounts(
         </ScrollArea>
       </RadioGroup>
       <Button
-        type={'button'}
         variant={'ghost'}
         size={'ghost'}
         className={'mr-auto ml-auto text-secondary'}

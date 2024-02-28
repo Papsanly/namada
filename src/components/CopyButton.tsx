@@ -13,7 +13,6 @@ export default function CopyButton({ value, size, ...props }: CopyButtonProps) {
 
   return (
     <Button
-      type={'button'}
       variant={'ghost'}
       size={'ghost'}
       onClick={async () => {

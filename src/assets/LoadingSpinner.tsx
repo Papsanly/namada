@@ -1,17 +1,17 @@
 import styles from './LoadingSpinner.module.css'
 
-export default function LoadingSpinner({ height = 80 }: { height?: number }) {
+export default function LoadingSpinner({ size = 20 }: { size?: number }) {
   return (
     <div
       className={styles.loadingSpinner}
-      style={{ width: `${height}px`, height: `${height}px` }}
+      style={{ width: `${size}px`, height: `${size}px` }}
     >
       <div
         className={styles.loadingSpinnerInner}
         style={{
-          width: `${height * 0.8}px`,
-          height: `${height * 0.8}px`,
-          borderWidth: `${height * 0.1}px`
+          width: `${size * 0.8}px`,
+          height: `${size * 0.8}px`,
+          borderWidth: `${size * 0.1}px`
         }}
       />
     </div>

@@ -1,9 +1,15 @@
+'use client'
+
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import NamadaLogo from '@/components/NamadaLogo'
 import { cn } from '@/lib/utils'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function Header() {
+  const pathname = usePathname()
+  const router = useRouter()
+
   return (
     <header
       className={cn(
@@ -28,12 +34,16 @@ export default function Header() {
       <div className={'flex flex-1 justify-start min-w-[165px]'}>
         <NamadaLogo />
       </div>
-      <Tabs defaultValue={'wallet'}>
+      <Tabs
+        value={pathname === '/receive' ? '/' : pathname}
+        onValueChange={value => router.push(value)}
+        defaultValue={'/'}
+      >
         <TabsList className={'rounded-full dark:bg-transparent'}>
-          <TabsTrigger value={'wallet'}>Wallet</TabsTrigger>
-          <TabsTrigger value={'ibc'}>IBC</TabsTrigger>
-          <TabsTrigger value={'staking'}>Staking</TabsTrigger>
-          <TabsTrigger value={'proposals'}>Proposals</TabsTrigger>
+          <TabsTrigger value={'/'}>Wallet</TabsTrigger>
+          <TabsTrigger value={'/ibc'}>IBC</TabsTrigger>
+          <TabsTrigger value={'/staking'}>Staking</TabsTrigger>
+          <TabsTrigger value={'/proposals'}>Proposals</TabsTrigger>
         </TabsList>
       </Tabs>
       <div className={'flex flex-1 justify-end'}>

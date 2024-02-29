@@ -25,11 +25,7 @@ export default function NamadaNotDetected(props: {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogAction
-            onClick={() =>
-              window.open(
-                'https://chromewebstore.google.com/detail/namada-extension/hnebcbhjpeejiclgbohcijljcnjdofek'
-              )
-            }
+            onClick={() => window.open('https://namada.net/extension')}
           >
             Download
           </AlertDialogAction>

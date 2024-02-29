@@ -47,6 +47,8 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
         'border-2',
         'text-nowrap',
         'border-transparent',
+        'transition-all',
+        'hover:opacity-90',
         'peer-data-[state=checked]:border-primary',
         'peer-data-[state=checked]:dark:border-accent',
         pathname === '/receive' &&

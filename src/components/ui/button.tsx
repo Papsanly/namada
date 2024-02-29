@@ -14,7 +14,10 @@ const buttonVariants = cva(
     'text-sm',
     'font-bold',
     'disabled:pointer-events-none',
-    'disabled:opacity-50'
+    'disabled:opacity-50',
+    'transition-all',
+    'hover:opacity-90',
+    'active:translate-y-[1px]'
   ),
   {
     variants: {

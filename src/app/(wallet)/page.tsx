@@ -149,7 +149,8 @@ export default function SendForm() {
                     'absolute',
                     'right-1.5',
                     'top-[50%]',
-                    'translate-y-[-50%]'
+                    'translate-y-[-50%]',
+                    'active:translate-y-[calc(-50%+1px)]'
                   )}
                   onClick={() => {
                     const activeWallet = form.getValues().wallet

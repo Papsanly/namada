@@ -1,10 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import SendForm from '@/components/SendForm'
-import Receive from '@/components/Receive'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { TabsProps } from '@radix-ui/react-tabs'
 
-export default function Actions() {
+export default function Actions(props: TabsProps) {
   return (
-    <Tabs defaultValue={'send'}>
+    <Tabs {...props} defaultValue={'send'}>
       <TabsList className={'w-full text-lg bg-tertiary rounded-full'}>
         <TabsTrigger value={'send'} className={'flex-1'}>
           Send
@@ -16,12 +15,6 @@ export default function Actions() {
           Receive
         </TabsTrigger>
       </TabsList>
-      <TabsContent value={'send'}>
-        <SendForm />
-      </TabsContent>
-      <TabsContent value={'receive'}>
-        <Receive />
-      </TabsContent>
     </Tabs>
   )
 }

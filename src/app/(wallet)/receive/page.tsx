@@ -1,3 +1,5 @@
+'use client'
+
 import Accounts from '@/components/Accounts'
 import { useEffect, useState } from 'react'
 import { useAccounts } from '@/providers/NamadaExtensionProvider'

@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/lib/utils'
 import ScrollArea from '@/components/ui/scroll-area'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
@@ -14,9 +16,11 @@ import CopyButton from '@/components/CopyButton'
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import DisplayBalance from '@/components/DisplayBalance'
+import { usePathname } from 'next/navigation'
 
 function Account({ alias, address, balance, isShielded }: AccountProps) {
   const queryBalance = useQueryBalance()
+  const pathname = usePathname()
 
   useEffect(() => {
     queryBalance(address).then()
@@ -44,7 +48,9 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
         'text-nowrap',
         'border-transparent',
         'peer-data-[state=checked]:border-primary',
-        'peer-data-[state=checked]:dark:border-accent'
+        'peer-data-[state=checked]:dark:border-accent',
+        pathname === '/receive' &&
+          'peer-data-[state=checked]:dark:border-accent-variant'
       )}
     >
       <div className={'flex flex-col'}>

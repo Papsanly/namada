@@ -4,18 +4,16 @@ import Accounts from '@/components/Accounts'
 import { useEffect, useState } from 'react'
 import { useAccounts } from '@/providers/NamadaExtensionProvider'
 import QRCode from 'qrcode.react'
-import { usePathname } from 'next/navigation'
 import CopyButton from '@/components/CopyButton'
 
 export default function Receive() {
   const [account, setAccount] = useState<string | undefined>()
   const [link, setLink] = useState('')
-  const pathname = usePathname()
   const { defaultAccountAddress } = useAccounts()
   useEffect(() => setAccount(defaultAccountAddress), [defaultAccountAddress])
   useEffect(() => {
-    setLink(`${location.origin}${pathname}?recipient=${account}`)
-  }, [pathname, account])
+    setLink(`${location.origin}?recipient=${account}`)
+  }, [account])
 
   return (
     <div className={'space-y-4'}>

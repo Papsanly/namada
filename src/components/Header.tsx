@@ -5,10 +5,19 @@ import ThemeSwitch from '@/components/ThemeSwitch'
 import NamadaLogo from '@/components/NamadaLogo'
 import { cn } from '@/lib/utils'
 import { usePathname, useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Header() {
   const pathname = usePathname()
   const router = useRouter()
+
+  useEffect(() => {
+    const prefetchUrls = ['/', '/ibc', '/staking', '/proposals']
+    prefetchUrls.filter(url => url !== pathname)
+    for (const url of prefetchUrls) {
+      router.prefetch(url)
+    }
+  }, [pathname, router])
 
   return (
     <header

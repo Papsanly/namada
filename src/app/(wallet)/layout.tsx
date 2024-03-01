@@ -7,13 +7,10 @@ import { useNamadaExtension } from '@/providers/NamadaExtensionProvider'
 import { Button } from '@/components/ui/button'
 import { ReactNode, useState } from 'react'
 import NamadaNotDetected from '@/components/NamadaNotDetected'
-import { usePathname, useRouter } from 'next/navigation'
 
 export default function Wallet({ children }: { children: ReactNode }) {
   const namadaExtension = useNamadaExtension()
   const [open, setOpen] = useState(false)
-  const pathname = usePathname()
-  const router = useRouter()
 
   return (
     <main
@@ -32,12 +29,7 @@ export default function Wallet({ children }: { children: ReactNode }) {
       {namadaExtension.isConnected ? (
         <>
           <Balance />
-          <Actions
-            value={pathname === '/' ? 'send' : 'receive'}
-            onValueChange={value => {
-              router.push(value === 'send' ? '/' : '/receive')
-            }}
-          />
+          <Actions />
           {children}
         </>
       ) : (

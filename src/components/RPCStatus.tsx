@@ -8,19 +8,22 @@ export default function RPCStatus() {
   const { namada, isConnected } = useNamadaExtension()
 
   useEffect(() => {
-    if (isConnected)
-      setInterval(async () => {
-        const chain = await namada.getChain()
-        const rpcUrl = chain?.rpc
-        if (rpcUrl) {
-          try {
-            const res = await fetch(rpcUrl)
-            setStatus(res.ok)
-          } catch (e) {
-            setStatus(false)
-          }
+    async function updateStatus() {
+      const chain = await namada.getChain()
+      const rpcUrl = chain?.rpc
+      if (rpcUrl) {
+        try {
+          const res = await fetch(rpcUrl)
+          setStatus(res.ok)
+        } catch (e) {
+          setStatus(false)
         }
-      }, 5000)
+      }
+    }
+    if (isConnected) {
+      updateStatus().then()
+      setInterval(updateStatus, 5000)
+    }
   }, [isConnected, namada])
 
   return (

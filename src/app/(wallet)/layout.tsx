@@ -17,11 +17,9 @@ export default function Wallet({ children }: { children: ReactNode }) {
       className={cn(
         'flex',
         'flex-col',
-        'w-[calc(100%-theme(spacing.8))]',
         'bg-[var(--main-page-background)]',
         'rounded-sm',
         'backdrop-blur-sm',
-        'max-w-[625px]',
         'p-4',
         'gap-4'
       )}

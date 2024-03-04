@@ -31,7 +31,9 @@ const config = {
       backgroundColor: {
         primary: 'var(--background-primary)',
         secondary: 'var(--background-secondary)',
-        tertiary: 'var(--background-tertiary)'
+        tertiary: 'var(--background-tertiary)',
+        destructive: 'var(--background-destructive)',
+        success: 'var(--background-success)'
       },
       borderColor: {
         primary: 'var(--border-primary)',

@@ -6,6 +6,7 @@ import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
 import React from 'react'
 import Background from '@/components/Background'
+import RPCStatus from '@/components/RPCStatus'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -41,7 +42,17 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
-          {children}
+          <div
+            className={cn(
+              'flex flex-col',
+              'w-[calc(100%-theme(spacing.8))]',
+              'max-w-[625px]',
+              'gap-2'
+            )}
+          >
+            <RPCStatus />
+            {children}
+          </div>
           <Background />
         </Providers>
       </body>

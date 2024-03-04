@@ -77,6 +77,8 @@
   --background-primary: white;
   --background-secondary: #e0e2ea;
   --background-tertiary: #c7c9d9;
+  --background-destructive: #dc2626;
+  --background-success: #4ade80;
 
   --text-primary: #000000;
   --text-secondary: #9d9d9d;

@@ -45,7 +45,7 @@ export default function Status() {
   return (
     <div className={'flex text-secondary flex-row gap-5 text-xs'}>
       <div className={'flex gap-1.5 items-center'}>
-        Chain ID: {chain?.chainId}
+        Chain ID: <span className={'font-bold'}>{chain?.chainId}</span>
       </div>
       <div className={'flex gap-1.5 items-center'}>
         Network Status:
@@ -58,7 +58,7 @@ export default function Status() {
         )}
       </div>
       <div className={'flex gap-1.5 items-center'}>
-        Block Height: {blockHeight}
+        Block Height: <span className={'font-bold'}>{blockHeight}</span>
       </div>
     </div>
   )

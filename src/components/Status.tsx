@@ -11,15 +11,15 @@ export default function Status() {
   const { namada, isConnected } = useNamadaExtension()
 
   useEffect(() => {
-    namada.getChain().then(setChain)
-  }, [namada])
+    if (isConnected) namada.getChain().then(setChain)
+  }, [isConnected, namada])
 
   useEffect(() => {
     async function updateStatus() {
       const rpcUrl = chain?.rpc
       if (rpcUrl) {
         try {
-          const res = await fetch(`${rpcUrl}/block`)
+          const res = await fetch(`${rpcUrl}/block`, { cache: 'no-store' })
           const json = await res.json()
           const newBlockHeight = Number(
             json['result']['block']['header']['height']

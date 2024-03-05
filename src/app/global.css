@@ -100,6 +100,8 @@
   --background-primary: black;
   --background-secondary: #1a1b1f;
   --background-tertiary: #2d3034;
+  --background-destructive: #f87171;
+  --background-success: #86efac;
 
   --text-primary: #f1f1f1;
   --text-secondary: #a1a1a1;

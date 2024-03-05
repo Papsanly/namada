@@ -6,7 +6,7 @@ import Header from '@/components/Header'
 import { cn } from '@/lib/utils'
 import React from 'react'
 import Background from '@/components/Background'
-import RPCStatus from '@/components/RPCStatus'
+import Status from '@/components/Status'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -50,7 +50,7 @@ export default function RootLayout({
               'gap-2'
             )}
           >
-            <RPCStatus />
+            <Status />
             {children}
           </div>
           <Background />

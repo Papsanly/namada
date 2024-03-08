@@ -36,11 +36,16 @@ export default function Status() {
         }
       }
     }
+    let interval: ReturnType<typeof setInterval> | undefined
     if (isConnected) {
       updateStatus().then()
-      setInterval(updateStatus, 3000)
+      interval = setInterval(updateStatus, 10000)
+    } else {
     }
-  }, [blockHeight, chain, isConnected, namada])
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+  }, [chain, isConnected, namada])
 
   return (
     <div className={'flex text-secondary flex-row gap-5 text-xs'}>

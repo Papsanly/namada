@@ -26,7 +26,6 @@ export default function Status() {
           const blockHeight = Number(json['result']['header']['height'])
           const blockTime = new Date(json['result']['header']['time'])
           const timeDiff = Date.now() - blockTime.getTime()
-          console.log(timeDiff)
           setNetworkStatus(timeDiff < MAX_TIME_DIFF)
           setBlockHeight(blockHeight)
         } catch (e) {

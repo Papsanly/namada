@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { useNamadaExtension } from '@/providers/NamadaExtensionProvider'
 import { Chain } from '@namada/types'
 
+const MAX_TIME_DIFF = 60000
+
 export default function Status() {
   const [chain, setChain] = useState<Chain | undefined>()
   const [networkStatus, setNetworkStatus] = useState<boolean | null>(null)
@@ -19,19 +21,16 @@ export default function Status() {
       const rpcUrl = chain?.rpc
       if (rpcUrl) {
         try {
-          const res = await fetch(`${rpcUrl}/block`, { cache: 'no-store' })
+          const res = await fetch(`${rpcUrl}/header`, { cache: 'no-store' })
           const json = await res.json()
-          const newBlockHeight = Number(
-            json['result']['block']['header']['height']
-          )
-          const prevBlockHeightStr = localStorage.getItem('block-height')
-          if (prevBlockHeightStr) {
-            const prevBlockHeight = Number(prevBlockHeightStr)
-            setNetworkStatus(prevBlockHeight !== newBlockHeight)
-            setBlockHeight(newBlockHeight)
-          }
-          localStorage.setItem('block-height', newBlockHeight.toString())
+          const blockHeight = Number(json['result']['header']['height'])
+          const blockTime = new Date(json['result']['header']['time'])
+          const timeDiff = Date.now() - blockTime.getTime()
+          console.log(timeDiff)
+          setNetworkStatus(timeDiff < MAX_TIME_DIFF)
+          setBlockHeight(blockHeight)
         } catch (e) {
+          console.error(e)
           setNetworkStatus(false)
         }
       }
@@ -39,7 +38,7 @@ export default function Status() {
     let interval: ReturnType<typeof setInterval> | undefined
     if (isConnected) {
       updateStatus().then()
-      interval = setInterval(updateStatus, 10000)
+      interval = setInterval(updateStatus, MAX_TIME_DIFF)
     } else {
     }
     return () => {

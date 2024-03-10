@@ -53,7 +53,9 @@ async function connectExtension(namada: Namada) {
 
 async function fetchAccounts(namada: Namada) {
   const namadaAccounts = (await namada.accounts()) ?? []
-  return namadaAccounts.map(account => ({ ...account, balance: undefined }))
+  return namadaAccounts
+    .filter(account => !account.isShielded)
+    .map(account => ({ ...account, balance: undefined }))
 }
 
 export default function NamadaExtensionProvider({

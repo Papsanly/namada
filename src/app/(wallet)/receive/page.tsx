@@ -4,7 +4,7 @@ import Accounts from '@/components/Accounts'
 import { useEffect, useState } from 'react'
 import { useAccounts } from '@/providers/NamadaExtensionProvider'
 import QRCode from 'qrcode.react'
-import CopyButton from '@/components/CopyButton'
+import CopyText from '@/components/CopyText'
 
 export default function Receive() {
   const [account, setAccount] = useState<string | undefined>()
@@ -22,12 +22,15 @@ export default function Receive() {
         <Accounts value={account} onValueChange={value => setAccount(value)} />
       </div>
       <QRCode size={250} className={'rounded-sm'} value={link} />
-      <div className={'flex flex-row items-center gap-2.5 code'}>
+      <CopyText
+        className={'flex max-w-full flex-row items-center gap-2.5 code'}
+        value={link}
+        size={12}
+      >
         <div className={'truncate'}>
           <code className={'text-sm'}>{link}</code>
         </div>
-        <CopyButton value={link} size={12} />
-      </div>
+      </CopyText>
     </div>
   )
 }

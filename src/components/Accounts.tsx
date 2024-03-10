@@ -12,7 +12,7 @@ import {
 } from '@/providers/NamadaExtensionProvider'
 import { Account as AccountProps } from '@/providers/NamadaExtensionProvider'
 import { FieldError } from 'react-hook-form'
-import CopyButton from '@/components/CopyButton'
+import CopyText from '@/components/CopyText'
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import DisplayBalance from '@/components/DisplayBalance'
@@ -57,12 +57,15 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
     >
       <div className={'flex flex-col'}>
         <p className={'font-bold text-lg'}>{alias}</p>
-        <div className={'flex items-center gap-1'}>
+        <CopyText
+          className={'text-secondary flex items-center gap-1'}
+          size={9}
+          value={address}
+        >
           <p className={'text-secondary text-xs'}>
             {address.slice(0, 8)}...{address.slice(address.length - 4)}
           </p>
-          <CopyButton size={9} value={address} className={'text-secondary'} />
-        </div>
+        </CopyText>
       </div>
       <div className={'flex flex-col items-end'}>
         <DisplayBalance

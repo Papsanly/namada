@@ -70,7 +70,7 @@ export default function ScrollArea({
           />
         </>
       )}
-      <div className={cn('overflow-x-scroll', className)} ref={ref}>
+      <div className={cn('overflow-x-auto scroll', className)} ref={ref}>
         {children}
       </div>
     </div>

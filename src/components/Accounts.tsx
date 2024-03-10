@@ -57,15 +57,17 @@ function Account({ alias, address, balance, isShielded }: AccountProps) {
     >
       <div className={'flex flex-col'}>
         <p className={'font-bold text-lg'}>{alias}</p>
-        <CopyText
-          className={'text-secondary flex items-center gap-1'}
-          size={9}
-          value={address}
-        >
-          <p className={'text-secondary text-xs'}>
-            {address.slice(0, 8)}...{address.slice(address.length - 4)}
-          </p>
-        </CopyText>
+        <div>
+          <CopyText
+            className={'text-secondary flex items-center gap-1'}
+            size={9}
+            value={address}
+          >
+            <p className={'text-xs'}>
+              {address.slice(0, 8)}...{address.slice(address.length - 4)}
+            </p>
+          </CopyText>
+        </div>
       </div>
       <div className={'flex flex-col items-end'}>
         <DisplayBalance

@@ -42,7 +42,7 @@ export default function SendForm() {
       wallet: defaultAccountAddress,
       recipient: recipient ?? '',
       amount: 0,
-      fee: 0,
+      fee: 2,
       memo: ''
     }
   })
